@@ -19,11 +19,11 @@
        under the License.
 */
 
-var path  = require('path'),
-    os  = require('os'),
-    Q     = require('q'),
+var path = require('path'),
+    os = require('os'),
+    Q = require('q'),
     child_process = require('child_process'),
-    ROOT  = path.join(__dirname, '..', '..');
+    ROOT = path.join(__dirname, '..', '..');
 
 /*
  * Starts running logcat in the shell.
@@ -31,11 +31,15 @@ var path  = require('path'),
  */
 module.exports.run = function() {
     var d = Q.defer();
-    var adb = child_process.spawn('adb', ['logcat'], {cwd: os.tmpdir()});
+    var adb = child_process.spawn('adb', ['logcat'], {
+        cwd: os.tmpdir()
+    });
 
     adb.stdout.on('data', function(data) {
         var lines = data ? data.toString().split('\n') : [];
-        var out = lines.filter(function(x) { return x.indexOf('nativeGetEnabledTags') < 0; });
+        var out = lines.filter(function(x) {
+            return x.indexOf('nativeGetEnabledTags') < 0;
+        });
         console.log(out.join('\n'));
     });
 

@@ -19,9 +19,9 @@
        under the License.
 */
 
-var Q       = require('q'),
-    path    = require('path'),
-    fs      = require('fs'),
+var Q = require('q'),
+    path = require('path'),
+    fs = require('fs'),
     nopt = require('nopt');
 
 var Adb = require('./Adb');
@@ -74,7 +74,7 @@ function parseOpts(options, resolvedTarget, projectRoot) {
     if (options.argv.keystore)
         packageArgs.keystore = path.relative(projectRoot, path.resolve(options.argv.keystore));
 
-    ['alias','storePassword','password','keystoreType'].forEach(function (flagName) {
+    ['alias', 'storePassword', 'password', 'keystoreType'].forEach(function(flagName) {
         if (options.argv[flagName])
             packageArgs[flagName] = options.argv[flagName];
     });
@@ -87,21 +87,21 @@ function parseOpts(options, resolvedTarget, projectRoot) {
         if (!fs.existsSync(buildConfig)) {
             throw new Error('Specified build config file does not exist: ' + buildConfig);
         }
-        events.emit('log', 'Reading build config file: '+ path.resolve(buildConfig));
+        events.emit('log', 'Reading build config file: ' + path.resolve(buildConfig));
         var buildjson = fs.readFileSync(buildConfig, 'utf8');
         //var config = JSON.parse(fs.readFileSync(buildConfig, 'utf8'));
         var config = JSON.parse(buildjson);
         if (config.android && config.android[ret.buildType]) {
             var androidInfo = config.android[ret.buildType];
-            if(androidInfo.keystore && !packageArgs.keystore) {
-                if(androidInfo.keystore.substr(0,1) === '~') {
+            if (androidInfo.keystore && !packageArgs.keystore) {
+                if (androidInfo.keystore.substr(0, 1) === '~') {
                     androidInfo.keystore = process.env.HOME + androidInfo.keystore.substr(1);
                 }
                 packageArgs.keystore = path.resolve(path.dirname(buildConfig), androidInfo.keystore);
                 events.emit('log', 'Reading the keystore from: ' + packageArgs.keystore);
             }
 
-            ['alias', 'storePassword', 'password','keystoreType'].forEach(function (key){
+            ['alias', 'storePassword', 'password', 'keystoreType'].forEach(function(key) {
                 packageArgs[key] = packageArgs[key] || androidInfo[key];
             });
         }
@@ -112,8 +112,8 @@ function parseOpts(options, resolvedTarget, projectRoot) {
             packageArgs.password, packageArgs.keystoreType);
     }
 
-    if(!ret.packageInfo) {
-        if(Object.keys(packageArgs).length > 0) {
+    if (!ret.packageInfo) {
+        if (Object.keys(packageArgs).length > 0) {
             events.emit('warn', '\'keystore\' and \'alias\' need to be specified to generate a signed archive.');
         }
     }
@@ -129,9 +129,9 @@ module.exports.runClean = function(options) {
     var opts = parseOpts(options, null, this.root);
     var builder = builders.getBuilder(opts.buildMethod);
     return builder.prepEnv(opts)
-    .then(function() {
-        return builder.clean(opts);
-    });
+        .then(function() {
+            return builder.clean(opts);
+        });
 };
 
 /**
@@ -151,22 +151,22 @@ module.exports.run = function(options, optResolvedTarget) {
     var builder = builders.getBuilder(opts.buildMethod);
     var self = this;
     return builder.prepEnv(opts)
-    .then(function() {
-        if (opts.prepEnv) {
-            self.events.emit('verbose', 'Build file successfully prepared.');
-            return;
-        }
-        return builder.build(opts)
         .then(function() {
-            var apkPaths = builder.findOutputApks(opts.buildType, opts.arch);
-            self.events.emit('log', 'Built the following apk(s): \n\t' + apkPaths.join('\n\t'));
-            return {
-                apkPaths: apkPaths,
-                buildType: opts.buildType,
-                buildMethod: opts.buildMethod
-            };
+            if (opts.prepEnv) {
+                self.events.emit('verbose', 'Build file successfully prepared.');
+                return;
+            }
+            return builder.build(opts)
+                .then(function() {
+                    var apkPaths = builder.findOutputApks(opts.buildType, opts.arch);
+                    self.events.emit('log', 'Built the following apk(s): \n\t' + apkPaths.join('\n\t'));
+                    return {
+                        apkPaths: apkPaths,
+                        buildType: opts.buildType,
+                        buildMethod: opts.buildMethod
+                    };
+                });
         });
-    });
 };
 
 /*
@@ -176,41 +176,41 @@ module.exports.run = function(options, optResolvedTarget) {
 module.exports.detectArchitecture = function(target) {
     function helper() {
         return Adb.shell(target, 'cat /proc/cpuinfo')
-        .then(function(output) {
-            return /intel/i.exec(output) ? 'x86' : 'arm';
-        });
+            .then(function(output) {
+                return /intel/i.exec(output) ? 'x86' : 'arm';
+            });
     }
     // It sometimes happens (at least on OS X), that this command will hang forever.
     // To fix it, either unplug & replug device, or restart adb server.
     return helper()
-    .timeout(1000, new CordovaError('Device communication timed out. Try unplugging & replugging the device.'))
-    .then(null, function(err) {
-        if (/timed out/.exec('' + err)) {
-            // adb kill-server doesn't seem to do the trick.
-            // Could probably find a x-platform version of killall, but I'm not actually
-            // sure that this scenario even happens on non-OSX machines.
-            return spawn('killall', ['adb'])
-            .then(function() {
-                events.emit('verbose', 'adb seems hung. retrying.');
-                return helper()
-                .then(null, function() {
-                    // The double kill is sadly often necessary, at least on mac.
-                    events.emit('warn', 'Now device not found... restarting adb again.');
-                    return spawn('killall', ['adb'])
+        .timeout(1000, new CordovaError('Device communication timed out. Try unplugging & replugging the device.'))
+        .then(null, function(err) {
+            if (/timed out/.exec('' + err)) {
+                // adb kill-server doesn't seem to do the trick.
+                // Could probably find a x-platform version of killall, but I'm not actually
+                // sure that this scenario even happens on non-OSX machines.
+                return spawn('killall', ['adb'])
                     .then(function() {
+                        events.emit('verbose', 'adb seems hung. retrying.');
                         return helper()
-                        .then(null, function() {
-                            return Q.reject(new CordovaError('USB is flakey. Try unplugging & replugging the device.'));
-                        });
+                            .then(null, function() {
+                                // The double kill is sadly often necessary, at least on mac.
+                                events.emit('warn', 'Now device not found... restarting adb again.');
+                                return spawn('killall', ['adb'])
+                                    .then(function() {
+                                        return helper()
+                                            .then(null, function() {
+                                                return Q.reject(new CordovaError('USB is flakey. Try unplugging & replugging the device.'));
+                                            });
+                                    });
+                            });
+                    }, function() {
+                        // For non-killall OS's.
+                        return Q.reject(err);
                     });
-                });
-            }, function() {
-                // For non-killall OS's.
-                return Q.reject(err);
-            });
-        }
-        throw err;
-    });
+            }
+            throw err;
+        });
 };
 
 module.exports.findBestApkForArchitecture = function(buildResults, arch) {

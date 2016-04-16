@@ -50,7 +50,7 @@ function removeFromPropertyList(projectProperties, key, value) {
     projectProperties.dirty = true;
 }
 
-function getRelativeLibraryPath (parentDir, subDir) {
+function getRelativeLibraryPath(parentDir, subDir) {
     var libraryPath = path.relative(parentDir, subDir);
     return (path.sep == '\\') ? libraryPath.replace(/\\/g, '/') : libraryPath;
 }
@@ -64,7 +64,7 @@ function AndroidProject(projectDir) {
     this.www = path.join(this.projectDir, 'assets/www');
 }
 
-AndroidProject.getProjectFile = function (projectDir) {
+AndroidProject.getProjectFile = function(projectDir) {
     if (!projectFileCache[projectDir]) {
         projectFileCache[projectDir] = new AndroidProject(projectDir);
     }
@@ -72,7 +72,7 @@ AndroidProject.getProjectFile = function (projectDir) {
     return projectFileCache[projectDir];
 };
 
-AndroidProject.purgeCache = function (projectDir) {
+AndroidProject.purgeCache = function(projectDir) {
     if (projectDir) {
         delete projectFileCache[projectDir];
     } else {
@@ -168,7 +168,7 @@ AndroidProject.prototype.write = function() {
     }
 };
 
-AndroidProject.prototype._getPropertiesFile = function (filename) {
+AndroidProject.prototype._getPropertiesFile = function(filename) {
     if (!this._propertiesEditors[filename]) {
         if (fs.existsSync(filename)) {
             this._propertiesEditors[filename] = properties_parser.createEditor(filename);

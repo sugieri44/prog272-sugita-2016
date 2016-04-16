@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
 /* jshint unused: vars */
 
@@ -26,38 +26,38 @@ var events = require('cordova-common').events;
 var CordovaError = require('cordova-common').CordovaError;
 
 var handlers = {
-    'source-file':{
-        install:function(obj, plugin, project, options) {
+    'source-file': {
+        install: function(obj, plugin, project, options) {
             if (!obj.src) throw new CordovaError('<source-file> element is missing "src" attribute for plugin: ' + plugin.id);
             if (!obj.targetDir) throw new CordovaError('<source-file> element is missing "target-dir" attribute for plugin: ' + plugin.id);
             var dest = path.join(obj.targetDir, path.basename(obj.src));
             copyNewFile(plugin.dir, obj.src, project.projectDir, dest, options && options.link);
         },
-        uninstall:function(obj, plugin, project, options) {
+        uninstall: function(obj, plugin, project, options) {
             var dest = path.join(obj.targetDir, path.basename(obj.src));
             deleteJava(project.projectDir, dest);
         }
     },
-    'lib-file':{
-        install:function(obj, plugin, project, options) {
+    'lib-file': {
+        install: function(obj, plugin, project, options) {
             var dest = path.join('libs', path.basename(obj.src));
             copyFile(plugin.dir, obj.src, project.projectDir, dest, options && options.link);
         },
-        uninstall:function(obj, plugin, project, options) {
+        uninstall: function(obj, plugin, project, options) {
             var dest = path.join('libs', path.basename(obj.src));
             removeFile(project.projectDir, dest);
         }
     },
-    'resource-file':{
-        install:function(obj, plugin, project, options) {
+    'resource-file': {
+        install: function(obj, plugin, project, options) {
             copyFile(plugin.dir, obj.src, project.projectDir, path.normalize(obj.target), options && options.link);
         },
-        uninstall:function(obj, plugin, project, options) {
+        uninstall: function(obj, plugin, project, options) {
             removeFile(project.projectDir, path.normalize(obj.target));
         }
     },
     'framework': {
-        install:function(obj, plugin, project, options) {
+        install: function(obj, plugin, project, options) {
             var src = obj.src;
             if (!src) throw new CordovaError('src not specified in <framework> for plugin: ' + plugin.id);
 
@@ -82,7 +82,7 @@ var handlers = {
                 project.addSubProject(parentDir, subDir);
             }
         },
-        uninstall:function(obj, plugin, project, options) {
+        uninstall: function(obj, plugin, project, options) {
             var src = obj.src;
             if (!src) throw new CordovaError('src not specified in <framework> for plugin: ' + plugin.id);
 
@@ -113,8 +113,8 @@ var handlers = {
             }
         }
     },
-    asset:{
-        install:function(obj, plugin, project, options) {
+    asset: {
+        install: function(obj, plugin, project, options) {
             if (!obj.src) {
                 throw new CordovaError('<asset> tag without required "src" attribute. plugin=' + plugin.dir);
             }
@@ -125,7 +125,7 @@ var handlers = {
             var www = options.usePlatformWww ? project.platformWww : project.www;
             copyFile(plugin.dir, obj.src, www, obj.target);
         },
-        uninstall:function(obj, plugin, project, options) {
+        uninstall: function(obj, plugin, project, options) {
             var target = obj.target || obj.src;
 
             if (!target) throw new CordovaError('<asset> tag without required "target" attribute');
@@ -136,7 +136,7 @@ var handlers = {
         }
     },
     'js-module': {
-        install: function (obj, plugin, project, options) {
+        install: function(obj, plugin, project, options) {
             // Copy the plugin's files into the www directory.
             var moduleSource = path.resolve(plugin.dir, obj.src);
             var moduleName = plugin.id + '.' + (obj.name || path.parse(obj.src).name);
@@ -153,7 +153,7 @@ var handlers = {
             shell.mkdir('-p', path.dirname(moduleDestination));
             fs.writeFileSync(moduleDestination, scriptContent, 'utf-8');
         },
-        uninstall: function (obj, plugin, project, options) {
+        uninstall: function(obj, plugin, project, options) {
             var pluginRelativePath = path.join('plugins', plugin.id, obj.src);
             var www = options.usePlatformWww ? project.platformWww : project.www;
             removeFileAndParents(www, pluginRelativePath);
@@ -161,7 +161,7 @@ var handlers = {
     }
 };
 
-module.exports.getInstaller = function (type) {
+module.exports.getInstaller = function(type) {
     if (handlers[type] && handlers[type].install) {
         return handlers[type].install;
     }
@@ -177,7 +177,7 @@ module.exports.getUninstaller = function(type) {
     events.emit('verbose', '<' + type + '> is not supported for android plugins');
 };
 
-function copyFile (plugin_dir, src, project_dir, dest, link) {
+function copyFile(plugin_dir, src, project_dir, dest, link) {
     src = path.resolve(plugin_dir, src);
     if (!fs.existsSync(src)) throw new CordovaError('"' + src + '" not found!');
 
@@ -199,14 +199,14 @@ function copyFile (plugin_dir, src, project_dir, dest, link) {
         fs.symlinkSync(path.relative(path.dirname(dest), src), dest);
     } else if (fs.statSync(src).isDirectory()) {
         // XXX shelljs decides to create a directory when -R|-r is used which sucks. http://goo.gl/nbsjq
-        shell.cp('-Rf', src+'/*', dest);
+        shell.cp('-Rf', src + '/*', dest);
     } else {
         shell.cp('-f', src, dest);
     }
 }
 
 // Same as copy file but throws error if target exists
-function copyNewFile (plugin_dir, src, project_dir, dest, link) {
+function copyNewFile(plugin_dir, src, project_dir, dest, link) {
     var target_path = path.resolve(project_dir, dest);
     if (fs.existsSync(target_path))
         throw new CordovaError('"' + target_path + '" already exists!');
@@ -215,22 +215,22 @@ function copyNewFile (plugin_dir, src, project_dir, dest, link) {
 }
 
 // checks if file exists and then deletes. Error if doesn't exist
-function removeFile (project_dir, src) {
+function removeFile(project_dir, src) {
     var file = path.resolve(project_dir, src);
     shell.rm('-Rf', file);
 }
 
 // deletes file/directory without checking
-function removeFileF (file) {
+function removeFileF(file) {
     shell.rm('-Rf', file);
 }
 
 // Sometimes we want to remove some java, and prune any unnecessary empty directories
-function deleteJava (project_dir, destFile) {
+function deleteJava(project_dir, destFile) {
     removeFileAndParents(project_dir, destFile, 'src');
 }
 
-function removeFileAndParents (baseDir, destFile, stopper) {
+function removeFileAndParents(baseDir, destFile, stopper) {
     stopper = stopper || '.';
     var file = path.resolve(baseDir, destFile);
     if (!fs.existsSync(file)) return;
@@ -240,8 +240,8 @@ function removeFileAndParents (baseDir, destFile, stopper) {
     // check if directory is empty
     var curDir = path.dirname(file);
 
-    while(curDir !== path.resolve(baseDir, stopper)) {
-        if(fs.existsSync(curDir) && fs.readdirSync(curDir).length === 0) {
+    while (curDir !== path.resolve(baseDir, stopper)) {
+        if (fs.existsSync(curDir) && fs.readdirSync(curDir).length === 0) {
             fs.rmdirSync(curDir);
             curDir = path.resolve(curDir, '..');
         } else {

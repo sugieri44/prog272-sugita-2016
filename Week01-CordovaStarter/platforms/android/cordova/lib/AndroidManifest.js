@@ -19,7 +19,7 @@
 
 var fs = require('fs');
 var et = require('elementtree');
-var xml= require('cordova-common').xmlHelpers;
+var xml = require('cordova-common').xmlHelpers;
 
 var DEFAULT_ORIENTATION = 'default';
 
@@ -66,10 +66,10 @@ AndroidManifest.prototype.setPackageId = function(pkgId) {
 AndroidManifest.prototype.getActivity = function() {
     var activity = this.doc.getroot().find('./application/activity');
     return {
-        getName: function () {
+        getName: function() {
             return activity.attrib['android:name'];
         },
-        setName: function (name) {
+        setName: function(name) {
             if (!name) {
                 delete activity.attrib['android:name'];
             } else {
@@ -77,10 +77,10 @@ AndroidManifest.prototype.getActivity = function() {
             }
             return this;
         },
-        getOrientation: function () {
+        getOrientation: function() {
             return activity.attrib['android:screenOrientation'];
         },
-        setOrientation: function (orientation) {
+        setOrientation: function(orientation) {
             if (!orientation || orientation.toLowerCase() === DEFAULT_ORIENTATION) {
                 delete activity.attrib['android:screenOrientation'];
             } else {
@@ -88,10 +88,10 @@ AndroidManifest.prototype.getActivity = function() {
             }
             return this;
         },
-        getLaunchMode: function () {
+        getLaunchMode: function() {
             return activity.attrib['android:launchMode'];
         },
-        setLaunchMode: function (launchMode) {
+        setLaunchMode: function(launchMode) {
             if (!launchMode) {
                 delete activity.attrib['android:launchMode'];
             } else {
@@ -151,11 +151,13 @@ AndroidManifest.prototype.setDebuggable = function(value) {
  *   manifest will be written to file it has been read from.
  */
 AndroidManifest.prototype.write = function(destPath) {
-    fs.writeFileSync(destPath || this.path, this.doc.write({indent: 4}), 'utf-8');
+    fs.writeFileSync(destPath || this.path, this.doc.write({
+        indent: 4
+    }), 'utf-8');
 };
 
 module.exports = AndroidManifest;
 
-function capitalize (str) {
+function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }

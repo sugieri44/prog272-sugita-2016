@@ -1,4 +1,3 @@
-
 var myObject = {
 
     getOne: function() {
@@ -18,7 +17,7 @@ var myObject = {
 
     today: 04132016,
     tomorrow: 04142016,
-    myName: "Erina"
+    myName: 'Erina'
 };
 
 module.exports = myObject;

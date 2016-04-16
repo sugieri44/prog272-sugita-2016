@@ -17,7 +17,7 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
 /**
  * Execute a cordova command.  It is up to the native side whether this action
@@ -53,7 +53,7 @@ var cordova = require('cordova'),
         // as set the navigator property itself.
         ONLINE_EVENT: 2
     },
-    jsToNativeBridgeMode,  // Set lazily.
+    jsToNativeBridgeMode, // Set lazily.
     nativeToJsBridgeMode = nativeToJsModes.ONLINE_EVENT,
     pollEnabled = false,
     bridgeSecret = -1;
@@ -61,7 +61,11 @@ var cordova = require('cordova'),
 var messagesFromNative = [];
 var isProcessing = false;
 var resolvedPromise = typeof Promise == 'undefined' ? null : Promise.resolve();
-var nextTick = resolvedPromise ? function(fn) { resolvedPromise.then(fn); } : function(fn) { setTimeout(fn); };
+var nextTick = resolvedPromise ? function(fn) {
+    resolvedPromise.then(fn);
+} : function(fn) {
+    setTimeout(fn);
+};
 
 function androidExec(success, fail, service, action, args) {
     if (bridgeSecret < 0) {
@@ -88,7 +92,10 @@ function androidExec(success, fail, service, action, args) {
         argsJson = JSON.stringify(args);
 
     if (success || fail) {
-        cordova.callbacks[callbackId] = {success:success, fail:fail};
+        cordova.callbacks[callbackId] = {
+            success: success,
+            fail: fail
+        };
     }
 
     var msgs = nativeApiProvider.get().exec(bridgeSecret, service, action, callbackId, argsJson);
