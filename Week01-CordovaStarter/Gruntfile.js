@@ -6,7 +6,9 @@ module.exports = function(grunt) {
         pkg: '<json:package.json>',
 
         jshint: {
-            files: ['**/*.js'],
+            files: ['**/*.js', '!**/platforms/**', '!**/plugins/**',
+                '!**/www/**'
+            ],
 
             options: {
                 ignores: [
@@ -43,14 +45,18 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            src: ['**/*.js', '!**/bitly-links.js'],
+            src: ['**/*.js', '!**/bitly-links.js',
+                '!**/platforms/**', '!**/plugins/**'
+            ],
             options: {
                 config: '.jscsrc'
             }
         },
 
         'jsbeautifier': {
-            files: ['**/*.js', '!**/node_modules/**', '!**/components/**'],
+            files: ['**/*.js', '!**/node_modules/**', '!**/components/**',
+                '!**/platforms/**', '!**/plugins/**'
+            ],
             options: {
                 'indentSize': 4
             }
