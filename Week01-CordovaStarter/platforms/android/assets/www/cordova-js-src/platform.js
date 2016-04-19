@@ -17,7 +17,7 @@
  * specific language governing permissions and limitations
  * under the License.
  *
- */
+*/
 
 // The last resume event that was received that had the result of a plugin call.
 var lastResumeEvent = null;
@@ -87,26 +87,27 @@ function onMessageFromNative(msg) {
     var cordova = require('cordova');
     var action = msg.action;
 
-    switch (action) {
+    switch (action)
+    {
         // Button events
         case 'backbutton':
         case 'menubutton':
         case 'searchbutton':
-            // App life cycle events
+        // App life cycle events
         case 'pause':
-            // Volume events
+        // Volume events
         case 'volumedownbutton':
         case 'volumeupbutton':
             cordova.fireDocumentEvent(action);
             break;
         case 'resume':
-            if (arguments.length > 1 && msg.pendingResult) {
-                if (arguments.length === 2) {
+            if(arguments.length > 1 && msg.pendingResult) {
+                if(arguments.length === 2) {
                     msg.pendingResult.result = arguments[1];
                 } else {
                     // The plugin returned a multipart message
                     var res = [];
-                    for (var i = 1; i < arguments.length; i++) {
+                    for(var i = 1; i < arguments.length; i++) {
                         res.push(arguments[i]);
                     }
                     msg.pendingResult.result = res;

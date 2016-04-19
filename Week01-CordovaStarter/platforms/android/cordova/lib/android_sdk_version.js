@@ -20,17 +20,15 @@
 */
 
 var child_process = require('child_process'),
-    Q = require('q');
+    Q     = require('q');
 
-var get_highest_sdk = function(results) {
+var get_highest_sdk = function(results){
     var reg = /\d+/;
     var apiLevels = [];
-    for (var i = 0; i < results.length; i++) {
+    for(var i=0;i<results.length;i++){
         apiLevels[i] = parseInt(results[i].match(reg)[0]);
     }
-    apiLevels.sort(function(a, b) {
-        return b - a;
-    });
+    apiLevels.sort(function(a,b){return b-a;});
     console.log(apiLevels[0]);
 };
 
@@ -44,9 +42,9 @@ var get_sdks = function() {
     return d.promise.then(function(output) {
         var reg = /android-\d+/gi;
         var results = output.match(reg);
-        if (results.length === 0) {
+        if(results.length===0){
             return Q.reject(new Error('No android sdks installed.'));
-        } else {
+        }else{
             get_highest_sdk(results);
         }
 
@@ -63,3 +61,4 @@ var get_sdks = function() {
 module.exports.run = function() {
     return Q.all([get_sdks()]);
 };
+

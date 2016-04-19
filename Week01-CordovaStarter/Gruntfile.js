@@ -6,9 +6,7 @@ module.exports = function(grunt) {
         pkg: '<json:package.json>',
 
         jshint: {
-            files: ['**/*.js', '!**/platforms/**', '!**/plugins/**',
-                '!**/www/**'
-            ],
+            files: ['**/*.js'],
 
             options: {
                 ignores: [
@@ -16,7 +14,9 @@ module.exports = function(grunt) {
                     '**/Library/jas/**',
                     '**/jquery-2.0.3.js',
                     '**/requirejs-wrapper*.js',
-                    '**/requirejs-setup*.js'
+                    '**/requirejs-setup*.js',
+                    '**/platforms/**',
+                    '**/plugins/**'
                 ],
                 reporter: 'checkstyle',
                 reporterOutput: 'result.xml',
@@ -45,8 +45,10 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            src: ['**/*.js', '!**/bitly-links.js',
-                '!**/platforms/**', '!**/plugins/**'
+            src: ['**/*.js',
+                '!**/bitly-links.js',
+                '!**/platforms/**',
+                '!**/plugins/**'
             ],
             options: {
                 config: '.jscsrc'
@@ -54,8 +56,11 @@ module.exports = function(grunt) {
         },
 
         'jsbeautifier': {
-            files: ['**/*.js', '!**/node_modules/**', '!**/components/**',
-                '!**/platforms/**', '!**/plugins/**'
+            files: ['**/*.js',
+                '!**/node_modules/**',
+                '!**/components/**',
+                '!**/platforms/**',
+                '!**/plugins/**'
             ],
             options: {
                 'indentSize': 4

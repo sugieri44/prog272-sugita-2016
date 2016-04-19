@@ -39,7 +39,7 @@ function ConsoleLogger() {
     var isVerbose = process.argv.indexOf('-d') >= 0 || process.argv.indexOf('--verbose') >= 0;
     // For CordovaError print only the message without stack trace unless we
     // are in a verbose mode.
-    process.on('uncaughtException', function(err) {
+    process.on('uncaughtException', function(err){
         if ((err instanceof CordovaError) && isVerbose) {
             console.error(err.stack);
         } else {
@@ -49,7 +49,7 @@ function ConsoleLogger() {
     });
 
     this.on('results', console.log);
-    this.on('verbose', function() {
+    this.on('verbose', function () {
         if (isVerbose)
             console.log.apply(console, arguments);
     });
@@ -67,7 +67,7 @@ util.inherits(ConsoleLogger, EventEmitter);
  *
  * @return  {ConsoleLogger}  New or already created instance of ConsoleLogger
  */
-ConsoleLogger.get = function() {
+ConsoleLogger.get = function () {
     loggerInstance = loggerInstance || new ConsoleLogger();
     return loggerInstance;
 };

@@ -34,7 +34,7 @@ var knownBuilders = {
  *
  * @return  {Builder}               A builder instance for specified build type.
  */
-module.exports.getBuilder = function(builderType, projectRoot) {
+module.exports.getBuilder = function (builderType, projectRoot) {
     if (!knownBuilders[builderType])
         throw new CordovaError('Builder ' + builderType + ' is not supported.');
 

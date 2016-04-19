@@ -35,7 +35,7 @@ var events = require('cordova-common').events;
  *
  * @returns {Promise}
  */
-module.exports.retryPromise = function(attemts_left, promiseFunction) {
+module.exports.retryPromise = function (attemts_left, promiseFunction) {
 
     // NOTE:
     //      get all trailing arguments, by skipping the first two (attemts_left and

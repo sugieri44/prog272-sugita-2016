@@ -27,7 +27,7 @@ var xmlHelpers = require('cordova-common').xmlHelpers;
 var CordovaError = require('cordova-common').CordovaError;
 var ConfigParser = require('cordova-common').ConfigParser;
 
-module.exports.prepare = function(cordovaProject) {
+module.exports.prepare = function (cordovaProject) {
 
     var self = this;
 
@@ -36,17 +36,17 @@ module.exports.prepare = function(cordovaProject) {
 
     // Update own www dir with project's www assets and plugins' assets and js-files
     return Q.when(updateWwwFrom(cordovaProject, this.locations))
-        .then(function() {
-            // update project according to config.xml changes.
-            return updateProjectAccordingTo(self._config, self.locations);
-        })
-        .then(function() {
-            handleIcons(cordovaProject.projectConfig, self.root);
-            handleSplashes(cordovaProject.projectConfig, self.root);
-        })
-        .then(function() {
-            self.events.emit('verbose', 'updated project successfully');
-        });
+    .then(function () {
+        // update project according to config.xml changes.
+        return updateProjectAccordingTo(self._config, self.locations);
+    })
+    .then(function () {
+        handleIcons(cordovaProject.projectConfig, self.root);
+        handleSplashes(cordovaProject.projectConfig, self.root);
+    })
+    .then(function () {
+        self.events.emit('verbose', 'updated project successfully');
+    });
 };
 
 /**
@@ -77,7 +77,7 @@ function updateConfigFilesFrom(sourceConfig, configMunger, locations) {
     // Merge changes from app's config.xml into platform's one
     var config = new ConfigParser(locations.configXml);
     xmlHelpers.mergeXml(sourceConfig.doc.getroot(),
-        config.doc.getroot(), 'android', /*clobber=*/ true);
+        config.doc.getroot(), 'android', /*clobber=*/true);
 
     config.write();
     return config;
@@ -121,9 +121,7 @@ function updateProjectAccordingTo(platformConfig, locations) {
     var name = platformConfig.name();
     var strings = xmlHelpers.parseElementtreeSync(locations.strings);
     strings.find('string[@name="app_name"]').text = name;
-    fs.writeFileSync(locations.strings, strings.write({
-        indent: 4
-    }), 'utf-8');
+    fs.writeFileSync(locations.strings, strings.write({indent: 4}), 'utf-8');
     events.emit('verbose', 'Wrote out Android application name to "' + name + '"');
 
     // Java packages cannot support dashes
@@ -151,7 +149,7 @@ function updateProjectAccordingTo(platformConfig, locations) {
 
     if (java_files.length === 0) {
         throw new CordovaError('No Java files found which extend CordovaActivity.');
-    } else if (java_files.length > 1) {
+    } else if(java_files.length > 1) {
         events.emit('log', 'Multiple candidate Java files (.java files which extend CordovaActivity) found. Guessing at the first one, ' + java_files[0]);
     }
 
@@ -162,12 +160,12 @@ function updateProjectAccordingTo(platformConfig, locations) {
 
     if (orig_pkg !== pkg) {
         // If package was name changed we need to remove old java with main activity
-        shell.rm('-Rf', java_files[0]);
+        shell.rm('-Rf',java_files[0]);
         // remove any empty directories
         var currentDir = path.dirname(java_files[0]);
         var sourcesRoot = path.resolve(locations.root, 'src');
-        while (currentDir !== sourcesRoot) {
-            if (fs.existsSync(currentDir) && fs.readdirSync(currentDir).length === 0) {
+        while(currentDir !== sourcesRoot) {
+            if(fs.existsSync(currentDir) && fs.readdirSync(currentDir).length === 0) {
                 fs.rmdirSync(currentDir);
                 currentDir = path.resolve(currentDir, '..');
             } else {
@@ -196,7 +194,7 @@ function default_versionCode(version) {
 }
 
 function copyImage(src, resourcesDir, density, name) {
-    var destFolder = path.join(resourcesDir, (density ? 'drawable-' : 'drawable') + density);
+    var destFolder = path.join(resourcesDir, (density ? 'drawable-': 'drawable') + density);
     var isNinePatch = !!/\.9\.png$/.exec(src);
     var ninePatchName = name.replace(/\.png$/, '.9.png');
 
@@ -223,7 +221,7 @@ function handleSplashes(projectConfig, platformRoot) {
         var destination = path.join(platformRoot, 'res');
 
         var hadMdpi = false;
-        resources.forEach(function(resource) {
+        resources.forEach(function (resource) {
             if (!resource.density) {
                 return;
             }
@@ -278,7 +276,7 @@ function handleIcons(projectConfig, platformRoot) {
     };
 
     // iterate over all icon elements to find the default icon and call parseIcon
-    for (var i = 0; i < icons.length; i++) {
+    for (var i=0; i<icons.length; i++) {
         var icon = icons[i];
         var size = icon.width;
         if (!size) {
@@ -311,11 +309,11 @@ function handleIcons(projectConfig, platformRoot) {
 // remove the default resource name from all drawable folders
 function deleteDefaultResourceAt(baseDir, resourceName) {
     shell.ls(path.join(baseDir, 'res/drawable-*'))
-        .forEach(function(drawableFolder) {
-            var imagePath = path.join(drawableFolder, resourceName);
-            shell.rm('-f', [imagePath, imagePath.replace(/\.png$/, '.9.png')]);
-            events.emit('verbose', 'Deleted ' + imagePath);
-        });
+    .forEach(function (drawableFolder) {
+        var imagePath = path.join(drawableFolder, resourceName);
+        shell.rm('-f', [imagePath, imagePath.replace(/\.png$/, '.9.png')]);
+        events.emit('verbose', 'Deleted ' + imagePath);
+    });
 }
 
 /**
@@ -365,8 +363,7 @@ function findOrientationValue(platformConfig) {
         return ORIENTATION_DEFAULT;
     }
 
-    var GLOBAL_ORIENTATIONS = ['default', 'portrait', 'landscape'];
-
+    var GLOBAL_ORIENTATIONS = ['default', 'portrait','landscape'];
     function isSupported(orientation) {
         return GLOBAL_ORIENTATIONS.indexOf(orientation.toLowerCase()) >= 0;
     }

@@ -23,10 +23,10 @@
 
 var shelljs = require('shelljs'),
     child_process = require('child_process'),
-    Q = require('q'),
-    path = require('path'),
-    fs = require('fs'),
-    ROOT = path.join(__dirname, '..', '..');
+    Q     = require('q'),
+    path  = require('path'),
+    fs    = require('fs'),
+    ROOT  = path.join(__dirname, '..', '..');
 var CordovaError = require('cordova-common').CordovaError;
 
 var isWindows = process.platform == 'win32';
@@ -72,10 +72,10 @@ module.exports.get_target = function() {
 // Returns a promise. Called only by build and clean commands.
 module.exports.check_ant = function() {
     return tryCommand('ant -version', 'Failed to run "ant -version", make sure you have ant installed and added to your PATH.')
-        .then(function(output) {
-            // Parse Ant version from command output
-            return /version ((?:\d+\.)+(?:\d+))/i.exec(output)[1];
-        });
+    .then(function (output) {
+        // Parse Ant version from command output
+        return /version ((?:\d+\.)+(?:\d+))/i.exec(output)[1];
+    });
 };
 
 // Returns a promise. Called only by build and clean commands.
@@ -109,9 +109,9 @@ module.exports.check_java = function() {
                 // OS X has a command for finding JAVA_HOME.
                 if (fs.existsSync('/usr/libexec/java_home')) {
                     return tryCommand('/usr/libexec/java_home', msg)
-                        .then(function(stdout) {
-                            process.env['JAVA_HOME'] = stdout.trim();
-                        });
+                    .then(function(stdout) {
+                        process.env['JAVA_HOME'] = stdout.trim();
+                    });
                 } else {
                     // See if we can derive it from javac's location.
                     // fs.realpathSync is require on Ubuntu, which symplinks from /usr/bin -> JDK
@@ -149,14 +149,14 @@ module.exports.check_java = function() {
             msg += 'Your JAVA_HOME is invalid: ' + process.env['JAVA_HOME'] + '\n';
         }
         return tryCommand('java -version', msg)
-            .then(function() {
-                // We use tryCommand with catchStderr = true, because
-                // javac writes version info to stderr instead of stdout
-                return tryCommand('javac -version', msg, true);
-            }).then(function(output) {
-                var match = /javac ((?:\d+\.)+(?:\d+))/i.exec(output)[1];
-                return match && match[1];
-            });
+        .then(function() {
+            // We use tryCommand with catchStderr = true, because
+            // javac writes version info to stderr instead of stdout
+            return tryCommand('javac -version', msg, true);
+        }).then(function (output) {
+            var match = /javac ((?:\d+\.)+(?:\d+))/i.exec(output)[1];
+            return match && match[1];
+        });
     });
 };
 
@@ -166,7 +166,6 @@ module.exports.check_android = function() {
         var androidCmdPath = forgivingWhichSync('android');
         var adbInPath = !!forgivingWhichSync('adb');
         var hasAndroidHome = !!process.env['ANDROID_HOME'] && fs.existsSync(process.env['ANDROID_HOME']);
-
         function maybeSetAndroidHome(value) {
             if (!hasAndroidHome && fs.existsSync(value)) {
                 hasAndroidHome = true;
@@ -231,7 +230,7 @@ module.exports.check_android = function() {
     });
 };
 
-module.exports.getAbsoluteAndroidCmd = function() {
+module.exports.getAbsoluteAndroidCmd = function () {
     var cmd = forgivingWhichSync('android');
     if (process.platform === 'win32') {
         return '"' + cmd + '"';
@@ -248,29 +247,29 @@ module.exports.check_android_target = function(valid_target) {
     if (!valid_target) valid_target = module.exports.get_target();
     var msg = 'Android SDK not found. Make sure that it is installed. If it is not at the default location, set the ANDROID_HOME environment variable.';
     return tryCommand('android list targets --compact', msg)
-        .then(function(output) {
-            var targets = output.split('\n');
-            if (targets.indexOf(valid_target) >= 0) {
-                return targets;
-            }
+    .then(function(output) {
+        var targets = output.split('\n');
+        if (targets.indexOf(valid_target) >= 0) {
+            return targets;
+        }
 
-            var androidCmd = module.exports.getAbsoluteAndroidCmd();
-            throw new CordovaError('Please install Android target: "' + valid_target + '".\n\n' +
-                'Hint: Open the SDK manager by running: ' + androidCmd + '\n' +
-                'You will require:\n' +
-                '1. "SDK Platform" for ' + valid_target + '\n' +
-                '2. "Android SDK Platform-tools (latest)\n' +
-                '3. "Android SDK Build-tools" (latest)');
-        });
+        var androidCmd = module.exports.getAbsoluteAndroidCmd();
+        throw new CordovaError('Please install Android target: "' + valid_target + '".\n\n' +
+            'Hint: Open the SDK manager by running: ' + androidCmd + '\n' +
+            'You will require:\n' +
+            '1. "SDK Platform" for ' + valid_target + '\n' +
+            '2. "Android SDK Platform-tools (latest)\n' +
+            '3. "Android SDK Build-tools" (latest)');
+    });
 };
 
 // Returns a promise.
 module.exports.run = function() {
     return Q.all([this.check_java(), this.check_android().then(this.check_android_target)])
-        .then(function() {
-            console.log('ANDROID_HOME=' + process.env['ANDROID_HOME']);
-            console.log('JAVA_HOME=' + process.env['JAVA_HOME']);
-        });
+    .then(function() {
+        console.log('ANDROID_HOME=' + process.env['ANDROID_HOME']);
+        console.log('JAVA_HOME=' + process.env['JAVA_HOME']);
+    });
 };
 
 /**
@@ -281,7 +280,7 @@ module.exports.run = function() {
  *                            (for example, check_android_target returns an array of android targets installed)
  * @param {Boolean} installed Indicates whether the requirement is installed or not
  */
-var Requirement = function(id, name, version, installed) {
+var Requirement = function (id, name, version, installed) {
     this.id = id;
     this.name = name;
     this.installed = installed || false;
@@ -313,19 +312,19 @@ module.exports.check_all = function() {
     ];
 
     // Then execute requirement checks one-by-one
-    return checkFns.reduce(function(promise, checkFn, idx) {
-            // Update each requirement with results
-            var requirement = requirements[idx];
-            return promise.then(checkFn)
-                .then(function(version) {
-                    requirement.installed = true;
-                    requirement.metadata.version = version;
-                }, function(err) {
-                    requirement.metadata.reason = err instanceof Error ? err.message : err;
-                });
-        }, Q())
-        .then(function() {
-            // When chain is completed, return requirements array to upstream API
-            return requirements;
+    return checkFns.reduce(function (promise, checkFn, idx) {
+        // Update each requirement with results
+        var requirement = requirements[idx];
+        return promise.then(checkFn)
+        .then(function (version) {
+            requirement.installed = true;
+            requirement.metadata.version = version;
+        }, function (err) {
+            requirement.metadata.reason = err instanceof Error ? err.message : err;
         });
+    }, Q())
+    .then(function () {
+        // When chain is completed, return requirements array to upstream API
+        return requirements;
+    });
 };

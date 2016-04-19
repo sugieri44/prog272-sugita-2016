@@ -24,7 +24,7 @@ var shell = require('shelljs');
 var events = require('cordova-common').events;
 var CordovaError = require('cordova-common').CordovaError;
 
-function GenericBuilder(projectDir) {
+function GenericBuilder (projectDir) {
     this.root = projectDir || path.resolve(__dirname, '../../..');
     this.binDirs = {
         ant: path.join(this.root, hasCustomRules(this.root) ? 'ant-build' : 'bin'),
@@ -52,14 +52,14 @@ GenericBuilder.prototype.clean = function() {
 GenericBuilder.prototype.findOutputApks = function(build_type, arch) {
     var self = this;
     return Object.keys(this.binDirs)
-        .reduce(function(result, builderName) {
-            var binDir = self.binDirs[builderName];
-            return result.concat(findOutputApksHelper(binDir, build_type, builderName === 'ant' ? null : arch));
-        }, [])
-        .sort(apkSorter);
+    .reduce(function (result, builderName) {
+        var binDir = self.binDirs[builderName];
+        return result.concat(findOutputApksHelper(binDir, build_type, builderName === 'ant' ? null : arch));
+    }, [])
+    .sort(apkSorter);
 };
 
-GenericBuilder.prototype.readProjectProperties = function() {
+GenericBuilder.prototype.readProjectProperties = function () {
     function findAllUniq(data, r) {
         var s = {};
         var m;
@@ -77,7 +77,7 @@ GenericBuilder.prototype.readProjectProperties = function() {
     };
 };
 
-GenericBuilder.prototype.extractRealProjectNameFromManifest = function() {
+GenericBuilder.prototype.extractRealProjectNameFromManifest = function () {
     var manifestPath = path.join(this.root, 'AndroidManifest.xml');
     var manifestData = fs.readFileSync(manifestPath, 'utf8');
     var m = /<manifest[\s\S]*?package\s*=\s*"(.*?)"/i.exec(manifestData);
@@ -85,7 +85,7 @@ GenericBuilder.prototype.extractRealProjectNameFromManifest = function() {
         throw new CordovaError('Could not find package name in ' + manifestPath);
     }
 
-    var packageName = m[1];
+    var packageName=m[1];
     var lastDotIndex = packageName.lastIndexOf('.');
     return packageName.substring(lastDotIndex + 1);
 };
@@ -102,18 +102,18 @@ function findOutputApksHelper(dir, build_type, arch) {
     shell.config.silent = true;
 
     var ret = shell.ls(path.join(dir, '*.apk'))
-        .filter(function(candidate) {
-            var apkName = path.basename(candidate);
-            // Need to choose between release and debug .apk.
-            if (build_type === 'debug') {
-                return /-debug/.exec(apkName) && !/-unaligned|-unsigned/.exec(apkName);
-            }
-            if (build_type === 'release') {
-                return /-release/.exec(apkName) && !/-unaligned/.exec(apkName);
-            }
-            return true;
-        })
-        .sort(apkSorter);
+    .filter(function(candidate) {
+        var apkName = path.basename(candidate);
+        // Need to choose between release and debug .apk.
+        if (build_type === 'debug') {
+            return /-debug/.exec(apkName) && !/-unaligned|-unsigned/.exec(apkName);
+        }
+        if (build_type === 'release') {
+            return /-release/.exec(apkName) && !/-unaligned/.exec(apkName);
+        }
+        return true;
+    })
+    .sort(apkSorter);
 
     shellSilent = shellSilent;
 
