@@ -1,0 +1,25 @@
+{
+  "name": "week03-express-jquery",
+  "description": "jquery demo",
+  "main": "",
+  "authors": [
+    "Erina Sugita"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "jQuery",
+    "express"
+  ],
+  "homepage": "https://github.com/sugieri44/prog272-sugita-2016",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
