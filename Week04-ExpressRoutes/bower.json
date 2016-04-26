@@ -1,0 +1,24 @@
+{
+  "name": "week04-express-routes",
+  "description": "routes in express",
+  "main": "bin/www",
+  "authors": [
+    "Erina"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "rouing",
+    "express"
+  ],
+  "homepage": "https://github.com/sugieri44/prog272-sugita-2016",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
