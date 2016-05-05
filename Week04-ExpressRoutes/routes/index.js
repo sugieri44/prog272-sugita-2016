@@ -23,6 +23,17 @@ router.get('/qux', function(request,response){//child-page /qux
   ]);
 });
 
+router.get('/add', function(request, response){
+  console.log('add was called');
+  console.log('The parameters are:', request.query);
+  console.log('The operatorA is:', request.query.operatorA);
+  var operatorA = parseInt(request.query.operatorA);
+  var operatorB = parseInt(request.query.operatorB);
+  response.send(
+      {sum: operatorA + operatorB}
+  )
+});
+
 router.get('/:id', function(request,response){//glab whatever passed in
   response.send(request.params.id);//and display
 });

@@ -6,6 +6,7 @@ $(document).ready(function(){
     $('#read').click(callRead);
     $('#readJson').click(callReadJson);
     $('#readQux').click(callQux);
+    $('#add').click(add);
 
     function callRead(){
         console.log('callRead called');
@@ -28,6 +29,18 @@ $(document).ready(function(){
         $.getJSON('/qux', function(result){ /**== $.getJSON('http://localhost:30025/read', function(result){**/
         console.log(result);
             $('#display').html(JSON.stringify(result)); //Convert to a JSON strings
+        })
+    }
+    
+    function add(){
+        var operatorA = $('#operatorA').val();//readonly = html(), valuecontrol = val()
+        var operatorB = $('#operatorB').val();
+        console.log('operators:', operatorA, operatorB);
+        var requestQuery = {operatorA: operatorA, operatorB: operatorB};
+        //use 'typeof' keyword to find out what the second parameter type 
+        $.getJSON('/add', requestQuery, function(sum){ //result pass back from the server
+            console.log("Sum:", sum);
+            $('#display').html("The sum is: " + sum.sum);
         })
     }
 
