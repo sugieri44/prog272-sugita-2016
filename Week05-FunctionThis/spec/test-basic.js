@@ -6,7 +6,7 @@ describe('Elvenware Simple Plain Suite', function () {
 
     'use strict';
 
-    fit('expects true to be true', function () {
+    it('expects true to be true', function () {
         expect(true).toBe(true);
     });
 
