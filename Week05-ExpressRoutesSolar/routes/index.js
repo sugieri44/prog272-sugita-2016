@@ -63,7 +63,7 @@ router.get('/renewablesByYear/:id', function(request, response) {
                     response.send({
                         result: 'Success',
                         renewables: json[i]});
-                    return
+                    return;
                 }
             }
             response.send({
