@@ -1,5 +1,5 @@
 /* global process: true */
-
+//Inside the browser/ How it looks like on client end 
 module.exports = function(config) {
     'use strict';
 
