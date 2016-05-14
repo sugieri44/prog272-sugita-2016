@@ -61,7 +61,7 @@ fdescribe('Elvenware Spec Routes Suite', function () {
                 expect(response.body.renewables.Year).toBe('2017');
             })
             .end(function (err, res) {
-                if(err) throw err;
+                if(err) { throw err; }
                 done();
             });
     });

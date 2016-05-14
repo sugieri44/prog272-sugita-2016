@@ -4,10 +4,18 @@ block content
   h1= title
   p Welcome to #{title}
 
-  button#getByYear displayDataByYear
 
-  button#getByIndex displayDataByIndex
+    p.basicDiv
+      button#getByYear displayDataByYear
+      input#year(type='number', value='2006')
 
-  button#getData displayData
+    p.basicDiv
+      button#getByIndex displayDataByIndex
+      input#index(type='number', value='1')
 
-  pre#display
+    hr
+
+    p.basicDiv
+      button#getData displayData
+
+    pre#display

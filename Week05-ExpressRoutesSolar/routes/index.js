@@ -24,7 +24,7 @@ router.get('/renewables', function(request, response) {
   });
 
 });
-
+/*
 router.get('/renewablesByIndex/:id', function(request, response) {
     console.log('Renewables By Index called', request.params.id);
 
@@ -43,10 +43,12 @@ router.get('/renewablesByIndex/:id', function(request, response) {
 
     });
 
-});
+});*/
 
-router.get('/renewablesByYear/:id', function(request, response) {
-    console.log('Renewables By Year called', request.params.id);
+
+router.get('/renewablesByIndex', function(request, response) {
+    var index = parseInt(request.query.requestedIndex);
+    console.log('Renewables By Index called', index);
 
     fs.readFile('data/Renewable.json', 'utf8', function(err, data) {
         //if (err) throw err;
@@ -56,10 +58,30 @@ router.get('/renewablesByYear/:id', function(request, response) {
         }else{
             //console.log(data);
             var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
+            response.send({
+                result: 'Success',
+                renewables: json[index]});
+        }
+
+    });
+
+});
+
+router.get('/renewablesByYear', function(request, response) {
+    var year = request.query.requestedYear;
+    console.log('Renewables By Year called', year);
+
+    fs.readFile('data/Renewable.json', 'utf8', function(err, data) {
+        //if (err) throw err;
+        if(err)
+        {
+            response.status(404).send(err);
+        }else{
+            var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
             for(var i = 0; i < json.length; i++){
-                console.log(json[i].Year);
-                if(request.params.id === json[i].Year){
-                    console.log("Found it!")
+               // console.log(typeof json[i].Year, typeof year);
+                if(year === json[i].Year){
+                    //console.log("Found it!")
                     response.send({
                         result: 'Success',
                         renewables: json[i]});
