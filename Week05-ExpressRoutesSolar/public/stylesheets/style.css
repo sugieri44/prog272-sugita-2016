@@ -6,3 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+
+.basicDiv {
+  margin-top: 5px;
+  padding: 5px;
+  border: solid seagreen 2px;
+}
