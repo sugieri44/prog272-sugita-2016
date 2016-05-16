@@ -28,9 +28,10 @@ var myFunction = {
 };
 
 //Constructor Object
-function MyFunction(){}
-MyFunction.prototype.getThis = function(){
-    return this;
+function MyFunction() {
+    MyFunction.prototype.getThis = function () {
+        return this;
+    }
 }
 
 //a simple strict function
