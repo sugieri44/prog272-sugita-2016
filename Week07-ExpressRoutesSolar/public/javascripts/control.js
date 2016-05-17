@@ -1,3 +1,30 @@
+define(['jquery'], function($) { //= This module dependes on jquey
+    //Do setup work here
+
+    function showBar() {
+        //console.log('Show Bar Clicks called now');
+        $('#display2').html('bar');
+    }
+
+    var control = {
+        color: "black",
+        size: "unisize",
+        setup: function() {
+            $(document).on('click', '#showClick', showBar);
+            $('#display2').html(control.color + ' - ' + control.size);
+        },
+        init: function() {
+            //console.log(this.color);
+            that = this;
+            //$('#aboutButton').click(about.init);
+            //$('#workButton').click(work.init);
+            $('#elf-view').load('/main', this.setup);
+        }
+    };
+
+    return control;
+});
+/*
 $(document).ready(function() { 
     'use strict'; 
     console.log('Document loaded');
@@ -24,7 +51,7 @@ $(document).ready(function() {
     }
 
 
-    /*function callGetByYear(){
+    /!*function callGetByYear(){
         console.log('callGetByYear was called');
         //Get a user input
         var year = $('#year').val();
@@ -47,7 +74,7 @@ $(document).ready(function() {
         .always(function(){
             console.log("complete");
         });
-    }*/
+    }*!/
 
     function callGetByYear(){
         console.log('callGetByYear was called');
@@ -75,7 +102,7 @@ $(document).ready(function() {
     }
     
 
-    /*function callGetByIndex(){
+    /!*function callGetByIndex(){
         console.log('callGetByIndex was called');
         //Get a user input
         var index = $('#index').val();
@@ -98,7 +125,7 @@ $(document).ready(function() {
             .always(function(){
                 console.log("complete");
             });
-    }*/
+    }*!/
     function callGetByIndex(){
         console.log('callGetByIndex was called');
         //Get a user input
@@ -126,4 +153,6 @@ $(document).ready(function() {
 });
 
 
+
+*/
 
