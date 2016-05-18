@@ -1,4 +1,5 @@
-define(['jquery'], function($) { //= This module dependes on jquey
+//Load jquery and stick it into '$' = code injection
+define(['jquery','work','about'], function($, work,about) { //= This module dependes on jquey
     //Do setup work here
 
     function showBar() {
@@ -16,9 +17,10 @@ define(['jquery'], function($) { //= This module dependes on jquey
         init: function() {
             //console.log(this.color);
             that = this;
-            //$('#aboutButton').click(about.init);
-            //$('#workButton').click(work.init);
-            $('#elf-view').load('/main', this.setup);
+            $('#aboutButton').click(about.init);
+            $('#workButton').click(work.init);
+            //$('#elf-view').load('/main', this.setup);
+            work.init();
         }
     };
 

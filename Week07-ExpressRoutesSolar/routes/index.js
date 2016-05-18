@@ -25,6 +25,11 @@ router.get('/renewables', function(request, response) {
 
 });
 
+// slash-someword
+router.get('/:id', function(request, response) {
+    response.render(request.params.id, { title: 'ElfComponent' });
+});
+
 /* PARAMETER PASSED IN JSON FORMAT
  router.get('/renewablesByIndex', function(request, response) {
      var index = parseInt(request.query.requestedIndex); //request.params.id
@@ -47,7 +52,7 @@ router.get('/renewables', function(request, response) {
 
  });*/
 
-router.get('/renewablesByIndex/:id', function(request, response) {
+/*router.get('/renewablesByIndex/:id', function(request, response) {
     console.log('Renewables By Index called', request.params.id);
 
     fs.readFile('data/Renewable.json', 'utf8', function(err, data) {
@@ -66,7 +71,7 @@ router.get('/renewablesByIndex/:id', function(request, response) {
     });
 
 });
-
+*/
 
 
 
@@ -101,7 +106,7 @@ router.get('/renewablesByYear', function(request, response) {
     };
 
 });*/
-
+/*
 router.get('/renewablesByYear/:id', function(request, response) {
     var year = request.params.id;
     console.log('Renewables By Year called', year);
@@ -133,5 +138,5 @@ router.get('/renewablesByYear/:id', function(request, response) {
 
     });
 
-});
+});*/
 module.exports = router;
