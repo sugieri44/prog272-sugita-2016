@@ -8,7 +8,8 @@ define(function() {
         init: function() {
             console.log(work.color);
             $('#elf-view').load('/work', function() {
-                $('#display').html(work.color + ' ' + work.size);
+                $('#display').html(work.color);
+                $('#display2').html(work.size);
             });
         }
     };
