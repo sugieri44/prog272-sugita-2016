@@ -52,7 +52,7 @@ router.get('/:id', function(request, response) {
 
  });*/
 
-/*router.get('/renewablesByIndex/:id', function(request, response) {
+router.get('/renewablesByIndex/:id', function(request, response) {
     console.log('Renewables By Index called', request.params.id);
 
     fs.readFile('data/Renewable.json', 'utf8', function(err, data) {
@@ -71,7 +71,7 @@ router.get('/:id', function(request, response) {
     });
 
 });
-*/
+
 
 
 
@@ -106,7 +106,7 @@ router.get('/renewablesByYear', function(request, response) {
     };
 
 });*/
-/*
+
 router.get('/renewablesByYear/:id', function(request, response) {
     var year = request.params.id;
     console.log('Renewables By Year called', year);
@@ -138,5 +138,5 @@ router.get('/renewablesByYear/:id', function(request, response) {
 
     });
 
-});*/
+});
 module.exports = router;

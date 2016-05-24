@@ -12,7 +12,9 @@ requirejs.config({
         control: 'javascripts/control',
         work: 'javascripts/work',
         about: 'javascripts/about',
-        renewable: 'javascripts/renewable'
+        renewables: 'javascripts/renewables',
+        renewablesByIndex: 'javascripts/renewablesByIndex',
+        renewablesByYear: 'javascripts/renewablesByYear'
     }
 });
 
