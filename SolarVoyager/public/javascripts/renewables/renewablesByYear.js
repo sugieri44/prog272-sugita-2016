@@ -30,7 +30,7 @@ define(function() {
         size: "big",
         init: function() {
             console.log("renewablesByYear.init() was called");
-            $('#elf-view').load('/renewable-by-year', function(response) {
+            $('#elf-view').load('/renewables/renewable-by-year', function(response) {
                 $('#display').html(renewablesByYear.color);
                 $('#display2').html(renewablesByYear.size);
                 //When the input control changes, call callGetByIndex

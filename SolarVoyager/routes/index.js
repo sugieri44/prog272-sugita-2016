@@ -25,6 +25,11 @@ router.get('/renewables', function(request, response) {
 
 });
 
+//Have to specify the new path
+router.get('/renewables/:id', function(request, response) {
+    response.render('renewables/' + request.params.id, { title: 'ElfComponent' });
+});
+
 // slash-someword
 router.get('/:id', function(request, response) {
     response.render(request.params.id, { title: 'ElfComponent' });

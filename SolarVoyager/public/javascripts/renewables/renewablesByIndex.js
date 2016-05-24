@@ -30,7 +30,7 @@ define(function() {
         size: "big",
         init: function() {
             console.log("renewablesByIndex.init() was called");
-            $('#elf-view').load('/renewable-by-index', function(response) {
+            $('#elf-view').load('/renewables/renewable-by-index', function(response) {
                 $('#display').html(renewablesByIndex.color);
                 $('#display2').html(renewablesByIndex.size);
                 //When the input control changes, call callGetByIndex

@@ -25,7 +25,7 @@ define(function() {
         size: "small",
         init: function() {
             console.log("renewables.init() was called");
-            $('#elf-view').load('/renewables-page', function(response) {
+            $('#elf-view').load('/renewables/renewables-page', function(response) {
                 $('#display').html(renewables.color);
                 $('#display2').html(renewables.size);
                 callGetData();
