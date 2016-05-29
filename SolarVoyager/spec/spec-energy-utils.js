@@ -11,10 +11,10 @@ describe('Elvenware Energy Utils Suite', function() {
         expect(true).toBe(true);
     });
 
-    it('confirms the number of properties in the object', function(){
+    it('confirms the number of properties in the object', function() {
         var sortedArray = energyUtils.objectToArray(renewables[0]);
         expect(sortedArray.length).toBe(8);
-    })
+    });
 
     it('objectToArray confirm works', function() {
         console.log(renewables[0]);

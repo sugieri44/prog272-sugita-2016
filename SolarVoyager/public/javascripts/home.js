@@ -4,8 +4,8 @@
 define(function() {
     'use strict';
     var home = {
-        color: "red",
-        size: "big",
+        color: 'red',
+        size: 'big',
         init: function() {
             console.log(home.color);
             $('#elf-view').load('/home', function() {

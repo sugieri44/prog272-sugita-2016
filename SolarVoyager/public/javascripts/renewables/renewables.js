@@ -5,17 +5,18 @@ define(function() {
     'use strict';
 
     var renewablesList;
+
     function getSimpleKeys(renewable) {
         return {
-            year: renewable["Year"],
-            solar: renewable["Solar (quadrillion Btu)"],
-            geo: renewable["Geothermal (quadrillion Btu)"],
-            otherBiomass: renewable["Other biomass (quadrillion Btu)"],
-            wind: renewable["Wind power (quadrillion Btu)"],
-            liquidBiofuels: renewable["Liquid biofuels (quadrillion Btu)"],
-            wood: renewable["Wood biomass (quadrillion Btu)"],
-            hydropower: renewable["Hydropower (quadrillion Btu)"]
-        }
+            year: renewable['Year'],
+            solar: renewable['Solar (quadrillion Btu)'],
+            geo: renewable['Geothermal (quadrillion Btu)'],
+            otherBiomass: renewable['Other biomass (quadrillion Btu)'],
+            wind: renewable['Wind power (quadrillion Btu)'],
+            liquidBiofuels: renewable['Liquid biofuels (quadrillion Btu)'],
+            wood: renewable['Wood biomass (quadrillion Btu)'],
+            hydropower: renewable['Hydropower (quadrillion Btu)']
+        };
     }
 
     function showRenewable(renewable) {
@@ -31,22 +32,22 @@ define(function() {
         $('#hydropowerView').val(renewable.hydropower);
     }
 
-    function getRenewable(){
+    function getRenewable() {
         console.log('getRenewable was called');
-        $.getJSON('/renewables', function(response){
+        $.getJSON('/renewables', function(response) {
                 console.log(response);
                 renewablesList = response.renewables;
                 showRenewable(renewablesList[$('#indexInput').val()]);
                 $('#debug').html(JSON.stringify(response, null, 4));
             })
-            .done(function(){
-                console.log("second success");
+            .done(function() {
+                console.log('second success');
             })
-            .fail(function(a,b,c){
-                console.log("Error", a,b,c);
+            .fail(function(a, b, c) {
+                console.log('Error', a, b, c);
             })
-            .always(function(){
-                console.log("complete");
+            .always(function() {
+                console.log('complete');
             });
     }
 
@@ -68,28 +69,28 @@ define(function() {
         var test = $('#indexInput').val();
         indexChange(parseInt(test));
     };
-    
+
     var renewables = {
-        color: "red",
-        size: "small",
+        color: 'red',
+        size: 'small',
         init: function() {
-            console.log("renewables.init() was called");
+            console.log('renewables.init() was called');
             $('#elf-view').load('renewables/renewables-page', function(response) {
                 $('#display').html(renewables.color);
                 $('#display2').html(renewables.size);
                 getRenewable();
                 //When the input control changes, call callGetByIndex
-                $('#minusButton').click(function(){
+                $('#minusButton').click(function() {
                     $('#indexInput').val(parseInt($('#indexInput').val()) - 1);
                     buttonChange();
                 });
-                $('#plusButton').click(function(){
+                $('#plusButton').click(function() {
                     $('#indexInput').val(parseInt($('#indexInput').val()) + 1);
                     buttonChange();
                 });
-                $('#indexInput').change(function(){
+                $('#indexInput').change(function() {
                     indexButtonChange();
-                })
+                });
             });
         }
     };
