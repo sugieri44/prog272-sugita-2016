@@ -2,6 +2,7 @@
  * Created by bcuser on 5/18/16.
  */
 define(function () {
+    'use strict';
     //Do setup work here
 
     var about = {

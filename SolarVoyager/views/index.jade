@@ -4,24 +4,9 @@ block content
   h1= title
   p Welcome to #{title}
 
-  button#workButton.btn.btn-primary Work
-  button#aboutButton.btn.btn-success  About
-  button#renewablesButton.btn.btn-primary  Renewables
-  button#renewablesByIndexButton.btn.btn-info  RenewablesByIndex
-  button#renewablesByYearButton.btn.btn-alert RenewablesByYear
+  button.homeButton.btn.btn-primary Home
+  button.renewablesButton.btn.btn-warning  Renewables
+  button.renewablesByIndexButton.btn.btn-info  RenewablesByIndex
+  button.renewablesByYearButton.btn.btn-danger RenewablesByYear
+  button.aboutButton.btn.btn-success  About
   #elf-view
-//
-    p.basicDiv
-      button#getByYear displayDataByYear
-      input#year(type='number', value='2006')
-
-    p.basicDiv
-      button#getByIndex displayDataByIndex
-      input#index(type='number', value='1')
-
-    hr
-
-    p.basicDiv
-      button#getData displayData
-
-    pre#display

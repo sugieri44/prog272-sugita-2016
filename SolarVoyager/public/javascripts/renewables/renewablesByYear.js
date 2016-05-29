@@ -2,7 +2,7 @@
  * Created by bcuser on 5/23/16.
  */
 define(function() {
-
+    'use strict';
     function callGetByYear(){
         console.log('callGetByYear was called');
         //Get a user input
@@ -30,7 +30,7 @@ define(function() {
         size: "big",
         init: function() {
             console.log("renewablesByYear.init() was called");
-            $('#elf-view').load('/renewables/renewable-by-year', function(response) {
+            $('#elf-view').load('renewables/renewable-by-year', function(response) {
                 $('#display').html(renewablesByYear.color);
                 $('#display2').html(renewablesByYear.size);
                 //When the input control changes, call callGetByIndex

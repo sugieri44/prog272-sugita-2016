@@ -2,13 +2,47 @@
    Created by bcuser on 5/23/16.
 
 .jumbotron
-    h1 Renewables
+    h1 Renewable Page
 
     .alert.alert-success
         p#display
 
-    .alert.alert-info
-        p#display2
+.container
+    .panel.panel-default
+        .panel-heading Renewable
+        .panel-body
+            .input-group
+                span.input-group-btn
+                    button#minusButton.btn.btn-danger.btn-number(type="button")
+                        span.glyphicon.glyphicon-minus
+                input#indexInput.form-control.input-number(type="number", value=0, min='0', max='12')
+                span.input-group-btn
+                    button#plusButton.btn.btn-success.btn-number(type="button")
+                        span.glyphicon.glyphicon-plus
+            .input-group
+                span.input-group-addon Year
+                input#yearView.form-control(type='text', placeholder='Year', aria-describedby='basic-addon1')
+            .input-group
+                span.input-group-addon Solar
+                input#solarView.form-control(type='text', placeholder='Solar', aria-describedby='basic-addon1')
+            .input-group
+                span.input-group-addon Geo
+                input#geoView.form-control(type='text', placeholder='geo', aria-describedby='basic-addon1')
+            .input-group
+                span.input-group-addon Other biomass
+                input#otherBiomassView.form-control(type='text', placeholder='OtherBiomass', aria-describedby='basic-addon1')
+            .input-group
+                span.input-group-addon Wind
+                input#windView.form-control(type='text', placeholder='Wind', aria-describedby='basic-addon1')
+            .input-group
+                span.input-group-addon Liquid Biofuels
+                input#liquidBiofuelsView.form-control(type='text', placeholder='LiquidBiofuels', aria-describedby='basic-addon1')
+            .input-group
+                span.input-group-addon Wood
+                input#woodView.form-control(type='text', placeholder='Wood', aria-describedby='basic-addon1')
+            .input-group
+                span.input-group-addon Hydropower
+                input#hydropowerView.form-control(type='text', placeholder='Hydropower', aria-describedby='basic-addon1')
 
-    .alert.alert-warning
-        pre#debug
+    .alert.alert-info
+        p#debug

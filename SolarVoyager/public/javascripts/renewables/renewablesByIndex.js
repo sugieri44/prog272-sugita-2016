@@ -2,7 +2,7 @@
  * Created by bcuser on 5/23/16.
  */
 define(function() {
-
+    'use strict';
     function callGetByIndex(){
         console.log('callGetByIndex was called');
         //Get a user input
@@ -30,7 +30,7 @@ define(function() {
         size: "big",
         init: function() {
             console.log("renewablesByIndex.init() was called");
-            $('#elf-view').load('/renewables/renewable-by-index', function(response) {
+            $('#elf-view').load('renewables/renewable-by-index', function(response) {
                 $('#display').html(renewablesByIndex.color);
                 $('#display2').html(renewablesByIndex.size);
                 //When the input control changes, call callGetByIndex
