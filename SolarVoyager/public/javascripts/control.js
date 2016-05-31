@@ -1,6 +1,10 @@
 //Load jquery and stick it into '$' = code injection
-define(['jquery', 'home', 'about', 'renewables', 'renewablesByIndex', 'renewablesByYear'],
-    function($, home, about, renewables, renewablesByIndex, renewablesByYear) { //= This module dependes on jquey
+define(['jquery', 'home', 'about',
+    'renewables', 'renewablesByIndex', 'renewablesByYear',
+    'energyOverview','energyTypes', 'msnTypes'],
+    function($, home, about,
+             renewables, renewablesByIndex, renewablesByYear,
+             energyOverview, energyTypes, msnTypes) {
         'use strict';
         //Do setup work here
 
@@ -24,6 +28,9 @@ define(['jquery', 'home', 'about', 'renewables', 'renewablesByIndex', 'renewable
                 $('.renewablesByIndexButton').click(renewablesByIndex.init);
                 $('.renewablesByYearButton').click(renewablesByYear.init);
                 $('.aboutButton').click(about.init);
+                $('.energyOverviewButton').click(energyOverview.init);
+                $('.energyTypesButton').click(energyTypes.init);
+                $('.msnTypesButton').click(msnTypes.init);
                 home.init();
             }
         };
