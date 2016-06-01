@@ -10,15 +10,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-//To handle renewable calls in their own folder
-router.get('/renewables/:id', function(request, response) {
-    console.log('renewables path');
-    'use strict';
-    response.render('renewables/' + request.params.id, {
-        title: 'ElfComponent'
-    });
-});
-
 // slash-someword
 router.get('/:id', function(request, response) {
     'use strict';
@@ -26,7 +17,6 @@ router.get('/:id', function(request, response) {
         title: 'ElfComponent'
     });
 });
-
 
 router.get('/renewables', function(request, response) {
     'use strict';
@@ -46,6 +36,13 @@ router.get('/renewables', function(request, response) {
 
     });
 
+});
+//To handle renewable calls in their own folder
+router.get('/renewables/:id', function(request, response) {
+    'use strict';
+    response.render('renewables/' + request.params.id, {
+        title: 'ElfComponent'
+    });
 });
 
 router.get('/renewablesByIndex/:id', function(request, response) {
@@ -72,7 +69,6 @@ router.get('/renewablesByIndex/:id', function(request, response) {
             });
         }
     });
-
 });
 
 router.get('/renewablesByYear/:id', function(request, response) {
@@ -116,6 +112,42 @@ router.get('/high-tech-energy/:id', function(request, response) {
 router.get('/energyOverview', function(request, response) {
     'use strict';
     console.log('energyOverview called');
+
+    fs.readFile('data/HighTechEnergy.json', 'utf8', function(err, data) {
+        //if (err) throw err;
+        if (err) {
+            response.status(404).send(err);
+        } else {
+            var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
+            response.send({
+                result: 'Success',
+                renewables: json
+            });
+        }
+    });
+});
+
+router.get('/energyTypes', function(request, response) {
+    'use strict';
+    console.log('energyTypes called');
+
+    fs.readFile('data/EnergyTypes.json', 'utf8', function(err, data) {
+        //if (err) throw err;
+        if (err) {
+            response.status(404).send(err);
+        } else {
+            var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
+            response.send({
+                result: 'Success',
+                renewables: json
+            });
+        }
+    });
+});
+
+router.get('/msnTypes', function(request, response) {
+    'use strict';
+    console.log('msnTypes called');
 
     fs.readFile('data/HighTechEnergy.json', 'utf8', function(err, data) {
         //if (err) throw err;
