@@ -30,7 +30,6 @@ define(['jquery', 'home', 'about',
                 $('.aboutButton').click(about.init);
                 $('.energyOverviewButton').click(energyOverview.init);
                 $('.energyTypesButton').click(energyTypes.init);
-                $('.msnTypesButton').click(msnTypes.init);
                 home.init();
             }
         };

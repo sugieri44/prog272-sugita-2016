@@ -6,7 +6,7 @@ define(function() {
 
     function getEnergyTypes() {
         console.log('getEnergyTypes was called');
-        $.getJSON('/energyTypes', function(response) {
+        $.getJSON('/high-tech-energy/energy-types', function(response) {
                 console.log(response);
                 $('#types').html(JSON.stringify(response, null, 4));
             })
@@ -20,10 +20,13 @@ define(function() {
                 console.log('complete');
             });
     }
+    
+    //display by looping through a list
+    
 
     var energyTypes = {
         init: function() {
-            console.log('energyOverview.init() was called');
+            console.log('energyTypes.init() was called');
             $('#elf-view').load('high-tech-energy/energy-types-page', function(response) {
                 getEnergyTypes();
             });

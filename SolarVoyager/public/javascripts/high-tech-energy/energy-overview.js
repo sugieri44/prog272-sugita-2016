@@ -7,7 +7,7 @@ define(function() {
     
     function getEnergyOverview() {
         console.log('getEnergyOverview was called');
-        $.getJSON('/energyOverview', function(response) {
+        $.getJSON('/high-tech-energy', function(response) {
                 console.log(response);
                 $('#overview').html(JSON.stringify(response, null, 4));
             })

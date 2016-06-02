@@ -6,8 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var renewables = require('./routes/renewables');
+var highTechEnergy = require('./routes/high-tech-energy');
 var users = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -24,6 +25,8 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/renewables',renewables);
+app.use('/high-tech-energy', highTechEnergy);
 app.use('/', routes);
 app.use('/users', users);
 

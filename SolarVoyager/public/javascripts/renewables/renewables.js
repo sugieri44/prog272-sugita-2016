@@ -2,8 +2,6 @@
 define(function() {
     'use strict';
 
-    var renewablesList;
-
     function getSimpleKeys(renewable) {
         return {
             year: renewable['Year'],
@@ -34,8 +32,8 @@ define(function() {
         console.log('getRenewable was called');
         $.getJSON('/renewables', function(response) {
                 console.log(response);
-                renewablesList = response.renewables;
-                showRenewable(renewablesList[$('#indexInput').val()]);
+                renewables.renewablesList = response.renewables;
+                showRenewable(renewables.renewablesList[$('#indexInput').val()]);
                 $('#debug').html(JSON.stringify(response, null, 4));
             })
             .done(function() {

@@ -11,7 +11,7 @@ define(function() {
         console.log('year:', year);
 
         //Call JSON and pass the user inputmas a parameter
-        $.getJSON('/renewablesByYear/' + year, function(response) {
+        $.getJSON('/renewables/byYear/' + year, function(response) {
                 console.log(response);
                 $('#debug').html(JSON.stringify(response, null, 4));
             })

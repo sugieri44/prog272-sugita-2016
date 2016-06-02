@@ -11,7 +11,7 @@ define(function() {
         console.log('index:', index);
 
         //Call JSON and pass the user inputs as a parameter
-        $.getJSON('/renewablesByIndex/' + index, function(response) {
+        $.getJSON('/renewables/byIndex/' + index, function(response) {
                 console.log(response);
                 $('#debug').html(JSON.stringify(response, null, 4));
             })
