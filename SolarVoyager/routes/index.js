@@ -97,7 +97,7 @@ router.get('/energyOverview', function(request, response) {
             var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
             response.send({
                 result: 'Success',
-                renewables: json
+                highTechEnergy: json
             });
         }
     });
@@ -107,7 +107,7 @@ router.get('/energyTypes', function(request, response) {
     'use strict';
     console.log('energyTypes called');
 
-    fs.readFile('data/EnergyTypes.json', 'utf8', function(err, data) {
+    fs.readFile('data/HighTechEnergy.json', 'utf8', function(err, data) {
         //if (err) throw err;
         if (err) {
             response.status(404).send(err);
@@ -115,7 +115,7 @@ router.get('/energyTypes', function(request, response) {
             var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
             response.send({
                 result: 'Success',
-                renewables: json
+                energyTypes: json
             });
         }
     });

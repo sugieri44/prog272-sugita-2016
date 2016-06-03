@@ -6,27 +6,37 @@ define(function() {
 
     //Should be in msn-types.js
     function getMsnTypes(energyTypes) {
-        console.log('getMsnTypes was called');
-        var currentMsn = {
+        console.log("getMsnTypes was called");
+        var uniqueTypes = [];
+        var singleType = {
             msn: null,
             description: ''
         };
-        var uniqueMsn = [];
 
+        function getShorterArray(longerArray){
+            console.log('getShorterArray() was called');
+            singleType = Object.create(longerArray);
+            singleType.msn = longerArray.MSN;
+            singleType.description = longerArray.Description;
 
+            return singleType;
+        }
 
         function insert(msn){
             console.log("insert() was called");
-            uniqueMsn.push(msn);
+            var uniqueType = getShorterArray(msn);
+            console.log(uniqueType);
+            uniqueTypes.push(uniqueType);
         }
 
+        //Insert the first item in the passed array
         insert(energyTypes[0]);
 
-        console.log(uniqueMsn[0]);
+        //To check to see if a passed msn already exists in the array
         function isUnique(msn){
             var result = true;
-            for(var i = 0; i < energyTypes.length; i++){
-                if(energyTypes[i].msn === msn){
+            for(var i = 0; i < uniqueTypes.length; i++){
+                if(uniqueTypes[i].MSN === msn){
                     result = false;
                     break;
                 }
@@ -34,24 +44,24 @@ define(function() {
             return result;
         }
 
+        //Loop through energyTypes and insert if msn is unique
         for(var i = 1; i < energyTypes.length; i++){
-            console.log("hi");
             var current = energyTypes[i];
-            if(isUnique(current.msn)){
+            if(isUnique(current.MSN)){
                 insert(current);
             }
         }
 
-        return uniqueMsn;
+        return uniqueTypes;
     }
 
     function getEnergyTypes() {
         console.log('getEnergyTypes was called');
         $.getJSON('/energyTypes', function(response) {
-                console.log(response);
             //pass only array
-                var msn = getMsnTypes(response);
-                $('#types').html(msn);
+                var types = getMsnTypes(response.energyTypes);
+                $('#types').html(JSON.stringify(types, null, 4));
+                //displayEnergyTypes(types);
             })
             .done(function() {
                 console.log('second success');
@@ -64,10 +74,18 @@ define(function() {
             });
     }
 
-    function displayEnergyTypes(){
-        //foreach array to display
-        $('#types').html(JSON.stringify(response, null, 4));
-    };
+    /*
+    function displayEnergyTypes(types){
+        var ul = document.getElementById("types");
+        var li = document.createElement("li");
+        types.forEach(function(type, i){
+            li.appendChild(type.msn + type.description);
+            ul.appendChild(li);
+            $('#types').append(ul);
+
+        });
+
+    }*/
 
     var energyTypes = {
         init: function() {
