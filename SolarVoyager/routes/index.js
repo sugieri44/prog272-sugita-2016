@@ -10,14 +10,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-// slash-someword
-router.get('/:id', function(request, response) {
-    'use strict';
-    response.render(request.params.id, {
-        title: 'ElfComponent'
-    });
-});
-
 router.get('/renewables', function(request, response) {
     'use strict';
     console.log('Renewables called');
@@ -36,13 +28,6 @@ router.get('/renewables', function(request, response) {
 
     });
 
-});
-//To handle renewable calls in their own folder
-router.get('/renewables/:id', function(request, response) {
-    'use strict';
-    response.render('renewables/' + request.params.id, {
-        title: 'ElfComponent'
-    });
 });
 
 router.get('/renewablesByIndex/:id', function(request, response) {
@@ -100,15 +85,6 @@ router.get('/renewablesByYear/:id', function(request, response) {
 });
 
 
-//To handle high-tech-energy calls in their own folder
-router.get('/high-tech-energy/:id', function(request, response) {
-    'use strict';
-    response.render('high-tech-energy/' + request.params.id, {
-        title: 'ElfComponent'
-    });
-});
-
-
 router.get('/energyOverview', function(request, response) {
     'use strict';
     console.log('energyOverview called');
@@ -145,21 +121,27 @@ router.get('/energyTypes', function(request, response) {
     });
 });
 
-router.get('/msnTypes', function(request, response) {
+//To handle renewable calls in their own folder
+router.get('/renewables/:id', function(request, response) {
     'use strict';
-    console.log('msnTypes called');
+    response.render('renewables/' + request.params.id, {
+        title: 'ElfComponent'
+    });
+});
 
-    fs.readFile('data/HighTechEnergy.json', 'utf8', function(err, data) {
-        //if (err) throw err;
-        if (err) {
-            response.status(404).send(err);
-        } else {
-            var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
-            response.send({
-                result: 'Success',
-                renewables: json
-            });
-        }
+// slash-someword
+router.get('/:id', function(request, response) {
+    'use strict';
+    response.render(request.params.id, {
+        title: 'ElfComponent'
+    });
+});
+
+//To handle high-tech-energy calls in their own folder
+router.get('/high-tech-energy/:id', function(request, response) {
+    'use strict';
+    response.render('high-tech-energy/' + request.params.id, {
+        title: 'ElfComponent'
     });
 });
 module.exports = router;

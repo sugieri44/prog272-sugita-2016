@@ -1,10 +1,10 @@
 //Load jquery and stick it into '$' = code injection
 define(['jquery', 'home', 'about',
     'renewables', 'renewablesByIndex', 'renewablesByYear',
-    'energyOverview','energyTypes', 'msnTypes'],
+    'energyOverview','energyTypes'],
     function($, home, about,
              renewables, renewablesByIndex, renewablesByYear,
-             energyOverview, energyTypes, msnTypes) {
+             energyOverview, energyTypes) {
         'use strict';
         //Do setup work here
 
@@ -30,7 +30,6 @@ define(['jquery', 'home', 'about',
                 $('.aboutButton').click(about.init);
                 $('.energyOverviewButton').click(energyOverview.init);
                 $('.energyTypesButton').click(energyTypes.init);
-                $('.msnTypesButton').click(msnTypes.init);
                 home.init();
             }
         };
