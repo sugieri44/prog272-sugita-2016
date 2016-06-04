@@ -1,5 +1,4 @@
 /* global process: true */
-//Inside the browser/ How it looks like on client end 
 module.exports = function(config) {
     'use strict';
 
@@ -11,18 +10,23 @@ module.exports = function(config) {
 
         files: [
             'public/components/jquery/dist/jquery.min.js',
+            'public/components/requirejs/require.js',
             'node_modules/jasmine-jquery/lib/*.js', {
                 pattern: 'spec/test-*.js',
+                included: false
+            }, {
+                pattern: 'spec/data/client-renewables.js',
                 included: false
             }, {
                 pattern: 'public/javascripts/**/*.js',
                 included: false
             },
-            'spec/main-test.js'
+            'spec/main-test.js',
+            '*.html'
         ],
 
         // list of files to exclude
-        exclude: ['public/javascript/main.js'],
+        exclude: ['public/javascripts/main.js'],
 
         reporters: ['spec'],
 
@@ -54,12 +58,6 @@ module.exports = function(config) {
         captureTimeout: 20000,
 
         // Set to false to watch files for changes
-        singleRun: false,
-
-        plugins: ['karma-jasmine',
-            'karma-spec-reporter',
-            'karma-phantomjs-launcher'
-        ]
-
+        singleRun: false
     });
 };

@@ -1,10 +1,11 @@
 //Load jquery and stick it into '$' = code injection
 define(['jquery', 'home', 'about',
-    'renewables', 'renewablesByIndex', 'renewablesByYear',
-    'energyOverview','energyTypes'],
+        'renewables', 'renewablesByIndex', 'renewablesByYear',
+        'energyOverview', 'energyTypes'
+    ],
     function($, home, about,
-             renewables, renewablesByIndex, renewablesByYear,
-             energyOverview, energyTypes) {
+        renewables, renewablesByIndex, renewablesByYear,
+        energyOverview, energyTypes) {
         'use strict';
         //Do setup work here
 
@@ -23,13 +24,13 @@ define(['jquery', 'home', 'about',
             init: function() {
                 //console.log(this.color);
                 //that = this;
-                $('.homeButton').click(home.init);
-                $('.renewablesButton').click(renewables.init);
-                $('.renewablesByIndexButton').click(renewablesByIndex.init);
-                $('.renewablesByYearButton').click(renewablesByYear.init);
-                $('.aboutButton').click(about.init);
-                $('.energyOverviewButton').click(energyOverview.init);
-                $('.energyTypesButton').click(energyTypes.init);
+                $('.homeMenu').click(home.init);
+                $('.renewablesMenu').click(renewables.init);
+                $('.renewablesByIndexMenu').click(renewablesByIndex.init);
+                $('.renewablesByYearMenu').click(renewablesByYear.init);
+                $('.aboutMenu').click(about.init);
+                $('.highTechEnergyOverviewMenu').click(energyOverview.init);
+                $('.highTechEnergyTypesMenu').click(energyTypes.init);
                 home.init();
             }
         };

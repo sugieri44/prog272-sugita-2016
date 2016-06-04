@@ -1,10 +1,10 @@
-
 define(function() {
     'use strict';
 
     var renewablesList;
 
     function getSimpleKeys(renewable) {
+        // jscs:disable requireDotNotation
         return {
             year: renewable['Year'],
             solar: renewable['Solar (quadrillion Btu)'],
@@ -15,6 +15,7 @@ define(function() {
             wood: renewable['Wood biomass (quadrillion Btu)'],
             hydropower: renewable['Hydropower (quadrillion Btu)']
         };
+        // jscs:enable requireDotNotation
     }
 
     function showRenewable(renewable) {

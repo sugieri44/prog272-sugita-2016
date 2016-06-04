@@ -81,9 +81,7 @@ router.get('/renewablesByYear/:id', function(request, response) {
             });
         }
     });
-
 });
-
 
 router.get('/energyOverview', function(request, response) {
     'use strict';

@@ -1,3 +1,7 @@
+/**
+ * Created by charlie on 5/11/16.
+ */
+
 module.exports = [{
     'Year': '2017',
     'Solar (quadrillion Btu)': '0.8045307',

@@ -4,6 +4,7 @@
 
 var request = require('supertest');
 var app = require('../app');
+var renewablesRoute = require('../routes/index');
 
 describe('Spec Routes Student Suite', function() {
     'use strict';
