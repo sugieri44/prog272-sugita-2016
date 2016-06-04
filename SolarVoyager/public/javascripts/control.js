@@ -21,15 +21,13 @@ define(['jquery', 'home', 'about',
                 $('#display2').html(control.color + ' - ' + control.size);
             },
             init: function() {
-                //console.log(this.color);
-                //that = this;
-                $('.homeButton').click(home.init);
-                $('.renewablesButton').click(renewables.init);
-                $('.renewablesByIndexButton').click(renewablesByIndex.init);
-                $('.renewablesByYearButton').click(renewablesByYear.init);
-                $('.aboutButton').click(about.init);
-                $('.energyOverviewButton').click(energyOverview.init);
-                $('.energyTypesButton').click(energyTypes.init);
+                $('.homeMenu').click(home.init);
+                $('.renewablesMenu').click(renewables.init);
+                $('.renewablesByIndexMenu').click(renewablesByIndex.init);
+                $('.renewablesByYearMenu').click(renewablesByYear.init);
+                $('.aboutMenu').click(about.init);
+                $('.highTechEnergyOverviewMenu').click(energyOverview.init);
+                $('.highTechEnergyTypesMenu').click(energyTypes.init);
                 home.init();
             }
         };
