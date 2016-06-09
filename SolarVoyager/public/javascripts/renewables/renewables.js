@@ -6,7 +6,7 @@ define(function() {
     function getSimpleKeys(renewable) {
         // jscs:disable requireDotNotation
         return {
-            year: renewable['Year'],
+            year: renewable.Year,
             solar: renewable['Solar (quadrillion Btu)'],
             geo: renewable['Geothermal (quadrillion Btu)'],
             otherBiomass: renewable['Other biomass (quadrillion Btu)'],

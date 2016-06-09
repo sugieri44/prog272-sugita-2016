@@ -6,7 +6,7 @@ module.exports = function(config) {
         // base path, that will be used to resolve files and exclude
         basePath: './',
 
-        frameworks: ['jasmine'],
+        frameworks: ['jasmine', 'requirejs'],
 
         files: [
             'public/components/jquery/dist/jquery.min.js',
@@ -21,8 +21,8 @@ module.exports = function(config) {
                 pattern: 'public/javascripts/**/*.js',
                 included: false
             },
-            'spec/main-test.js',
-            '*.html'
+            'spec/main-test.js'
+
         ],
 
         // list of files to exclude
