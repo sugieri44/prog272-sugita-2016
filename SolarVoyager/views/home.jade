@@ -1,9 +1,25 @@
-//
-   Created by bcuser on 5/18/16.
-.jumbotron
-    h1 Home
+.container
+    .jumbotron
+        h1 Home Page
 
-    .alert.alert-warning
-        p#display
+    .panel.panel-default
+        .panel-heading Renewable
+        .panel-body
+            form#target(method='post', action='/bar')
+                select#dataType(name='dataType')
+                    option Database
+                    option JSON
+                hr
+                select#dataSource(name='dataSource')
+                    option Local MongoDb
+                    option MLab
+                hr
+                input#comment(type="text", name='comment' value='foo')
+                hr
+                input.btn.btn-success(type="submit", value='Submit')
 
-        p#display2
+    .panel.panel-default
+        .panel-heading Renewable
+        .panel-body
+            .alert.alert-info
+                pre#debug
