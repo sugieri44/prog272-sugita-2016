@@ -2,7 +2,11 @@
 define(function() {
     'use strict';
 
+    var useDatabase = false;
+    var index = $('#indexInput').val();
+
     function getSimpleKeys(renewable) {
+        console.log("getSimpleKeys is called: ", renewable);
         return {
             year: renewable['Year'],
             solar: renewable['Solar (quadrillion Btu)'],
@@ -16,6 +20,7 @@ define(function() {
     }
 
     function showRenewable(renewable) {
+        console.log("showRenewalbe is called: ", renewable)
         if (!useDatabase) {
             renewable = getSimpleKeys(renewable);
         }
@@ -38,6 +43,7 @@ define(function() {
         $.getJSON(renewableRoutes[routeType], function(response) {
                 console.log(response);
                 renewables.renewablesList = response.renewables;
+                console.log(renewables.renewablesList[index]);
                 //showRenewable(renewables.renewablesList[$('#indexInput').val()]);
                 showRenewable(renewables.renewablesList[index]);
                 $('#debug').html(JSON.stringify(response, null, 4));
@@ -57,7 +63,7 @@ define(function() {
         if (test < 12 && test >= 0) {
             var index = test;
             $('#indexInput').val(index);
-            showRenewable(renewablesList[index]);
+            showRenewable(renewables.renewablesList[index]);
         }
     }
 

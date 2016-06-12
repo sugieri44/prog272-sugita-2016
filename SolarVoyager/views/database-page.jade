@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    select#collection(name='collectionType')
+        option Renewables
+        option High Tech Energy
+    button#insertValidData Insert Valid Data
+    button#getAll Get All
+    button#emptyCollection Empty Collection
+
+    pre#display

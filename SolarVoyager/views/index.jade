@@ -14,6 +14,8 @@ block content
         ul.nav.navbar-nav
           li.trigger-collapse(ng-class="{ active: isActive('/')}")
             a.homeMenu Home
+          li.trigger-collapse(ng-class="{ active: isActive('/')}")
+            a.databaseMenu Database
           li.collapse.dropdown
             a.dropdown-toggle(data-toggle='dropdown')
               | Renewables
@@ -21,14 +23,16 @@ block content
             ul.dropdown-menu(role='menu')
               li.trigger-collapse(ng-class="{ active: isActive('/renewables')}")
                 a.renewablesMenu Renewables
-                  // YOU FILL IN THESE TWO ITEMS
+                a.renewablesByIndexMenu Renewables By Index
+                a.renewablesByYearMenu Renewables By Year
           li.collapse.dropdown
             a.dropdown-toggle(data-toggle='dropdown')
               | Energy
               b.caret
             ul.dropdown-menu(role='menu')
-              // BASED ON THE DROP DOWN SHOWN ABOVE
-              // YOU DEFINE EnerygyOverview and EnergyTypes
+              li.trigger-collapse(ng-class="{ active: isActive('/high-tech-energy')}")
+                a.highTechEnergyOverviewMenu High Tech Energy Overview
+                a.highTechEnergyTypesMenu High Tech Energy Types
           li.trigger-collapse(ng-class="{ active: isActive('/about')}")
             a.aboutMenu About
   .container

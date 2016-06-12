@@ -17,7 +17,8 @@ requirejs.config({
         renewablesByYear: 'javascripts/renewables/renewablesByYear',
         energyOverview: 'javascripts/high-tech-energy/energy-overview',
         energyTypes: 'javascripts/high-tech-energy/energy-types',
-        msnTypes: 'javascripts/high-tech-energy/msn-types'
+        msnTypes: 'javascripts/high-tech-energy/msn-types',
+        database: 'javascripts/database'
     }
 });
 
