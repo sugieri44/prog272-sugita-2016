@@ -11,4 +11,4 @@ var settingsSchema = mongoose.Schema({
     "comment": String
 });
 
-module.exports = mongoose.model('prog272_lastname_setting', settingsSchema);
+module.exports = mongoose.model('prog272_sugita_setting', settingsSchema);

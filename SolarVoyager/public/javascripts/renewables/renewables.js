@@ -16,7 +16,9 @@ define(function() {
     }
 
     function showRenewable(renewable) {
-        renewable = getSimpleKeys(renewable);
+        if (!useDatabase) {
+            renewable = getSimpleKeys(renewable);
+        }
         console.log(renewable.year);
         $('#yearView').val(renewable.year);
         $('#solarView').val(renewable.solar);
@@ -30,10 +32,14 @@ define(function() {
 
     function getRenewable() {
         console.log('getRenewable was called');
-        $.getJSON('/renewables', function(response) {
+        var routeType = useDatabase ? 0 : 1;
+        var renewableRoutes = ['/allRenewables', '/renewables'];
+
+        $.getJSON(renewableRoutes[routeType], function(response) {
                 console.log(response);
                 renewables.renewablesList = response.renewables;
-                showRenewable(renewables.renewablesList[$('#indexInput').val()]);
+                //showRenewable(renewables.renewablesList[$('#indexInput').val()]);
+                showRenewable(renewables.renewablesList[index]);
                 $('#debug').html(JSON.stringify(response, null, 4));
             })
             .done(function() {

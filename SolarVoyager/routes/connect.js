@@ -8,7 +8,7 @@ var connect = {
     connected: false,
 
     simpleConnect: function() {
-        var url= 'mongodb://127.0.0.1:27017/test';
+        var url= 'mongodb://127.0.0.1:27017/renew';
         connect.connected = true;
         mongoose.connect(url);
         var db = mongoose.connection;

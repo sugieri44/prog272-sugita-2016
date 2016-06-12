@@ -1,0 +1,7 @@
+/**
+ * Created by bcuser on 6/12/16.
+ */
+{
+    "verbose": true,
+    "ignore": ["renewables.json", "**/components/**"]
+}
