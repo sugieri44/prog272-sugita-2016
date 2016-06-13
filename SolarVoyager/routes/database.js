@@ -79,11 +79,11 @@ router.get('/emptyHighTechCollection', function(request, response) {
 });
 
 router.get('/insertRenewableCollection', function(request, response) {
-    allMongo.readDataAndInsert(response);
+    allMongo.readRenewables(response);
 });
 
-router.get('/emptyHighTechCollection', function(request, response) {
-    allMongo.readDataAndInsert(response);
+router.get('/insertHighTechCollection', function(request, response) {
+    allMongo.readHighTechEnergy(response);
 });
 
 router.get('/:id', function(request, response) {

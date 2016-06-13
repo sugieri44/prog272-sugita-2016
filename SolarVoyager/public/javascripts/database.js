@@ -60,10 +60,6 @@ define(function() {
                 console.log( "finished" );
             });
     }
-    
-    $('#insertValidData').click(insertCollection);
-    $("#getAll").click(getAll);
-    $("#emptyCollection").click(emptyCollection);
 
     var database = {
         collection: '',

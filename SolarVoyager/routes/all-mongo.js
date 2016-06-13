@@ -11,7 +11,7 @@ var highTechEnergies = require('../models/high-tech-energy');
 var fs = require('fs');
 
 var validRenewables = require('../data/Renewable.json');
-var validHighTech = require('../data/HighTechEnergy.json');
+var validHighTechEnergy = require('../data/HighTechEnergy.json');
 var allData;
 var totalRenewablesSaved = 0;
 var totalHighTechsSaved = 0;
@@ -87,11 +87,22 @@ allMongo.writeData = function(fileName, data) {
     });
 }
 
-allMongo.readDataAndInsert = function(fileName, response) {
-    fs.readFile(fileName, function(err, collection) {
+allMongo.readRenewables = function(response) {
+    fs.readFile(validRenewables, function(err, collection) {
         if (err) throw (err);
         collection = JSON.parse(collection);
         allMongo.numberOfRenewables = collection.length;
+        for (var i = 0; i < collection.length; i++) {
+            insert(collection[i], response);
+        }
+    });
+}
+
+allMongo.readHighTechEnergy = function(response) {
+    fs.readFile(validHighTechEnergy, function(err, collection) {
+        if (err) throw (err);
+        collection = JSON.parse(collection);
+        allMongo.numberOfHighTechs = collection.length;
         for (var i = 0; i < collection.length; i++) {
             insert(collection[i], response);
         }
