@@ -27,7 +27,10 @@ function saveSettings(request, response) {
 
     newSettings.save(function(err) {
         console.log('saved: ', newSettings.dataSource, newSettings.dataType, newSettings.comment);
-        response.send({ result: 'success', query: request.body});
+        response.send({
+            result: 'success',
+            query: request.body
+        });
 
     });
 }
@@ -38,12 +41,16 @@ router.post('/updateSettings', function(request, response) {
         connect.doConnection();
     }
 
-    settings.findOne({keyNote: 'settings'}, function(err, doc) {
+    settings.findOne({
+        keyNote: 'settings'
+    }, function(err, doc) {
         console.log('findone', err, doc);
         if (err) {
-            response.send({result: 'error'});
+            response.send({
+                result: 'error'
+            });
         } else {
-            if(doc === null) {
+            if (doc === null) {
                 saveSettings(request, response);
             } else {
                 doc.dataType = request.body.dataType;
@@ -61,15 +68,27 @@ router.get('/getSettings', function(request, response) {
         connect.doConnection();
     }
 
-    settings.findOne({keyNote: 'settings'}, function(err, doc) {
+    settings.findOne({
+        keyNote: 'settings'
+    }, function(err, doc) {
         console.log('findone', err, doc);
         if (err) {
-            response.send({result: 'error'});
+            response.send({
+                result: 'error'
+            });
         } else {
-            if(doc === null) {
-                response.send({settings: {dataType: 'Database', dataSource: 'Local MongoDb', comment: 'Default Comment'}})
+            if (doc === null) {
+                response.send({
+                    settings: {
+                        dataType: 'Database',
+                        dataSource: 'Local MongoDb',
+                        comment: 'Default Comment'
+                    }
+                })
             } else {
-                response.send({settings: doc});
+                response.send({
+                    settings: doc
+                });
             }
         }
     });

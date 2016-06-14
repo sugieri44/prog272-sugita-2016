@@ -1,12 +1,11 @@
-
-define(function() {
+define(['jquery','settings'], function($, settings) {
     'use strict';
 
     var useDatabase = false;
     var index = $('#indexInput').val();
 
     function getSimpleKeys(renewable) {
-        console.log("getSimpleKeys is called: ", renewable);
+        console.log('getSimpleKeys is called: ', renewable);
         return {
             year: renewable['Year'],
             solar: renewable['Solar (quadrillion Btu)'],
@@ -20,7 +19,7 @@ define(function() {
     }
 
     function showRenewable(renewable) {
-        console.log("showRenewalbe is called: ", renewable)
+        console.log('showRenewalbe is called: ', renewable)
         if (!useDatabase) {
             renewable = getSimpleKeys(renewable);
         }
@@ -37,7 +36,7 @@ define(function() {
 
     function getRenewable() {
         console.log('getRenewable was called');
-        var routeType = useDatabase ? 0 : 1;
+        var routeType = settings.useDatabase ? 0 : 1;
         var renewableRoutes = ['/allRenewables', '/renewables'];
 
         $.getJSON(renewableRoutes[routeType], function(response) {
@@ -81,6 +80,8 @@ define(function() {
     var renewables = {
         color: 'red',
         size: 'small',
+        renewablesList: [],
+        getRenewable: getRenewable,
         init: function() {
             console.log('renewables.init() was called');
             $('#elf-view').load('renewables/renewables-page', function(response) {

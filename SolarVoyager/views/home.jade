@@ -6,11 +6,11 @@
         .panel-heading Renewable
         .panel-body
             form#target(method='post', action='/bar')
-                select#dataType(name='dataType')
+                select.form-control#dataType(name='dataType')
                     option Database
                     option JSON
                 hr
-                select#dataSource(name='dataSource')
+                select.form-control#dataSource(name='dataSource')
                     option Local MongoDb
                     option MLab
                 hr

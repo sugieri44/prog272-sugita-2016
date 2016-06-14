@@ -15,6 +15,7 @@ var validHighTechEnergy = require('../data/HighTechEnergy.json');
 var allData;
 var totalRenewablesSaved = 0;
 var totalHighTechsSaved = 0;
+
 function allMongo() {
 
 }
@@ -26,16 +27,16 @@ function insertRenewable(renewable, response) {
     if (!connect.connected) {
         connect.doConnection();
     }
-    //if(collection === )
+
     var newRenewable = new renewables({
-        "Year": renewable.year,
-        "Solar (quadrillion Btu)": renewable.solar,
-        "Geothermal (quadrillion Btu)": renewable.geo,
-        "Other biomass (quadrillion Btu)": renewable.otherBiomass,
-        "Wind power (quadrillion Btu)": renewable.wind,
-        "Liquid biofuels (quadrillion Btu)": renewable.liquidBiofuels,
-        "Wood biomass (quadrillion Btu)": renewable.wood,
-        "Hydropower (quadrillion Btu)": renewable.hydropower
+        'Year': renewable.year,
+        'Solar (quadrillion Btu)': renewable.solar,
+        'Geothermal (quadrillion Btu)': renewable.geo,
+        'Other biomass (quadrillion Btu)': renewable.otherBiomass,
+        'Wind power (quadrillion Btu)': renewable.wind,
+        'Liquid biofuels (quadrillion Btu)': renewable.liquidBiofuels,
+        'Wood biomass (quadrillion Btu)': renewable.wood,
+        'Hydropower (quadrillion Btu)': renewable.hydropower
     });
 
     console.log('inserting', newRenewable['Solar (quadrillion Btu)']);
@@ -47,7 +48,9 @@ function insertRenewable(renewable, response) {
 
         if (totalRenewablesSaved === allMongo.numberOfRenewables) {
             //mongoose.disconnect();
-            response.send({result: 'Success'});
+            response.send({
+                result: 'Success'
+            });
         }
     });
 }
@@ -57,12 +60,12 @@ function insertHighTechEnergy(highTechEnergy, response) {
         connect.doConnection();
     }
     var newHighTechEnergy = new highTechEnergies({
-        "MSN": highTechEnergy.MSN,
-        "YYYYMM": highTechEnergy.YYYYMM,
-        "Value": highTechEnergy.Value,
-        "Column_Order": highTechEnergy.Column_Order,
-        "Description": highTechEnergy.Description,
-        "Unit": highTechEnergy.Unit
+        'MSN': highTechEnergy.MSN,
+        'YYYYMM': highTechEnergy.YYYYMM,
+        'Value': highTechEnergy.Value,
+        'Column_Order': highTechEnergy.Column_Order,
+        'Description': highTechEnergy.Description,
+        'Unit': highTechEnergy.Unit
     });
 
     console.log('inserting', newHighTechEnergy['MSN']);
@@ -74,7 +77,9 @@ function insertHighTechEnergy(highTechEnergy, response) {
 
         if (totalHighTechsSaved === allMongo.numberOfHighTechs) {
             //mongoose.disconnect();
-            response.send({result: 'Success'});
+            response.send({
+                result: 'Success'
+            });
         }
     });
 }
@@ -82,7 +87,7 @@ function insertHighTechEnergy(highTechEnergy, response) {
 allMongo.writeData = function(fileName, data) {
     var data = JSON.stringify(data, null, 4);
     fs.writeFile(fileName, data, function(err, data) {
-        if (err) throw(err);
+        if (err) throw (err);
         console.log('success writing file');
     });
 }
@@ -93,7 +98,7 @@ allMongo.readRenewables = function(response) {
         collection = JSON.parse(collection);
         allMongo.numberOfRenewables = collection.length;
         for (var i = 0; i < collection.length; i++) {
-            insert(collection[i], response);
+            insertRenewable(collection[i], response);
         }
     });
 }
@@ -104,7 +109,7 @@ allMongo.readHighTechEnergy = function(response) {
         collection = JSON.parse(collection);
         allMongo.numberOfHighTechs = collection.length;
         for (var i = 0; i < collection.length; i++) {
-            insert(collection[i], response);
+            insertHighTechEnergy(collection[i], response);
         }
     });
 }

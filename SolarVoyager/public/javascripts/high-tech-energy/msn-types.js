@@ -5,12 +5,12 @@ define(function() {
     'use strict';
 
     //get a list
-    
+
     //do types.forEach(function(energyTypes)
-    
+
     //and find a unique type of msn type 
     //and send back a list with 12 unique msn types
-    
+
     function getMsnTypes() {
         console.log('getMsnTypes was called');
         $.getJSON('/msnTypes', function(response) {

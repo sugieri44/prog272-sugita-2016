@@ -8,7 +8,7 @@ var connect = {
     connected: false,
 
     simpleConnect: function() {
-        var url= 'mongodb://127.0.0.1:27017/renew';
+        var url = 'mongodb://127.0.0.1:27017/renew';
         connect.connected = true;
         mongoose.connect(url);
         var db = mongoose.connection;
@@ -20,7 +20,7 @@ var connect = {
     },
 
     // mongodb://<dbuser>:<dbpassword>@ds011281.mlab.com:11281/prog272-sugita
-    mlabConnect:function() {
+    mlabConnect: function() {
         connect.connected = true;
         var userName = 'foo';
         var password = 'boo';
@@ -34,7 +34,7 @@ var connect = {
         var db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function(callback) {
-            connected = true;
+            connect.connected = true;
             console.log('Opened connection to mongo');
         });
     },

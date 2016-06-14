@@ -10,8 +10,11 @@ var connect = require('./connect');
 //var mongoose = require('mongoose');
 
 /* GET home page. */
-router.get('/', function(req, res, next) { 'use strict';
-    res.render('index', { title: 'Week09-MongooseBasics' });
+router.get('/', function(req, res, next) {
+    'use strict';
+    res.render('index', {
+        title: 'Week09-MongooseBasics'
+    });
 });
 
 var connected = false;
@@ -61,9 +64,14 @@ router.get('/getAllHighTech', function(request, response) {
 router.get('/emptyRenewablesCollection', function(request, response) {
     renewables.remove({}, function(err) {
         if (err) {
-            response.send({result: 'err', err: err});
+            response.send({
+                result: 'err',
+                err: err
+            });
         } else {
-            response.send({result: 'renewables collection removed'});
+            response.send({
+                result: 'renewables collection removed'
+            });
         }
     });
 });
@@ -71,14 +79,19 @@ router.get('/emptyRenewablesCollection', function(request, response) {
 router.get('/emptyHighTechCollection', function(request, response) {
     highTechEnergy.remove({}, function(err) {
         if (err) {
-            response.send({result: 'err', err: err});
+            response.send({
+                result: 'err',
+                err: err
+            });
         } else {
-            response.send({result: 'highTech collection removed'});
+            response.send({
+                result: 'highTech collection removed'
+            });
         }
     });
 });
 
-router.get('/insertRenewableCollection', function(request, response) {
+router.get('/insertRenewablesCollection', function(request, response) {
     allMongo.readRenewables(response);
 });
 

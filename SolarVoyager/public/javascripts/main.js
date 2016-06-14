@@ -18,7 +18,8 @@ requirejs.config({
         energyOverview: 'javascripts/high-tech-energy/energy-overview',
         energyTypes: 'javascripts/high-tech-energy/energy-types',
         msnTypes: 'javascripts/high-tech-energy/msn-types',
-        database: 'javascripts/database'
+        database: 'javascripts/database',
+        settings: 'javascripts/settings'
     }
 });
 

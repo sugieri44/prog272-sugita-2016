@@ -5,59 +5,60 @@ define(function() {
     'use strict';
 
     var routes = [
-        '/insertRenewableCollection',
+        '/insertRenewablesCollection',
         '/insertHighTechCollection',
         '/getAllRenewables',
         '/getAllHighTech',
         '/emptyRenewablesCollection',
-        '/emptyHighTechCollection'];
+        '/emptyHighTechCollection'
+    ];
 
     function insertCollection(collection) {
         var routeType = (collection === 'Renewables' ? 0 : 1);
         var jqxhr = $.get(routes[routeType], function(result) {
-                alert( "success" );
+                alert('success');
                 console.log(JSON.stringify(result, null, 4));
             })
             .done(function() {
-                console.log( "second success" );
+                console.log('second success');
             })
             .fail(function() {
-                alert( "error" );
+                alert('error');
             })
             .always(function() {
-                console.log( "finished" );
+                console.log('finished');
             });
     }
 
-    function getAll(){
+    function getAll() {
         var routeType = (collection === 'Renewables' ? 2 : 3);
         $.getJSON(routes[routeType], function(result) {
                 $('#display').html(JSON.stringify(result, null, 4));
             })
             .done(function() {
-                console.log( "second success" );
+                console.log('second success');
             })
             .fail(function() {
-                alert( "error" );
+                alert('error');
             })
             .always(function() {
-                console.log( "finished" );
+                console.log('finished');
             });
     }
 
-    function emptyCollection(){
+    function emptyCollection() {
         var routeType = (collection === 'Renewables' ? 4 : 5);
         $.getJSON(routes[routeType], function(result) {
                 $('#display').html(JSON.stringify(result, null, 4));
             })
             .done(function() {
-                console.log( "second success" );
+                console.log('second success');
             })
             .fail(function() {
-                alert( "error" );
+                alert('error');
             })
             .always(function() {
-                console.log( "finished" );
+                console.log('finished');
             });
     }
 

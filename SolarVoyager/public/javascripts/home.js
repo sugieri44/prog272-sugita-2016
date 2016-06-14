@@ -2,7 +2,7 @@
  * Created by charlie on 5/18/16.
  */
 
-define(function() {
+define(['settings'], function(settings) {
     'use strict';
 
     function getSettings() {
@@ -33,7 +33,7 @@ define(function() {
                 $('#display').html(home.color);
                 $('#display2').html(home.size);
                 getSettings();
-                $("#target").submit(function(event) {
+                $('#target').submit(function(event) {
                     event.preventDefault();
                     var userFormData = $(this).serialize();
                     $('#debug').html(userFormData);
@@ -44,6 +44,7 @@ define(function() {
                     };
                     $.post('/database-settings/updateSettings', userData, function(result) {
                         console.log(settings);
+                        settings.setSettings(result.query);
                     });
                 });
 
