@@ -37,7 +37,7 @@ define(['jquery','settings'], function($, settings) {
     function getRenewable() {
         console.log('getRenewable was called');
         var routeType = settings.useDatabase ? 0 : 1;
-        var renewableRoutes = ['/allRenewables', '/renewables'];
+        var renewableRoutes = ['/database/getAllRenewables', '/renewables'];
 
         $.getJSON(renewableRoutes[routeType], function(response) {
                 console.log(response);

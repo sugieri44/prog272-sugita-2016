@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var database = require('./routes/database');
 var dataBaseSettings = require('./routes/database-settings');
 var routes = require('./routes/index');
 var renewables = require('./routes/renewables');
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/database', database);
 app.use('/database-settings', dataBaseSettings);
 app.use('/renewables', renewables);
 app.use('/high-tech-energy', highTechEnergy);

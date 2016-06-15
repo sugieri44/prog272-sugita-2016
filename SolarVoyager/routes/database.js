@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var renewables = require('../models/renewables');
-var highTechEnergy = require('../models/highTechEnergy');
+var highTechEnergy = require('../models/high-tech-energy');
 var allMongo = require('./all-mongo');
 var connect = require('./connect');
 //var mongoose = require('mongoose');
@@ -35,7 +35,7 @@ router.get('/getAllRenewables', function(request, response) {
 
         response.send({
             result: 'Success',
-            allData: data
+            renewables: data
         });
     });
 });
@@ -92,6 +92,7 @@ router.get('/emptyHighTechCollection', function(request, response) {
 });
 
 router.get('/insertRenewablesCollection', function(request, response) {
+    console.log('insertRenewablesCollection routes called');
     allMongo.readRenewables(response);
 });
 
@@ -100,6 +101,7 @@ router.get('/insertHighTechCollection', function(request, response) {
 });
 
 router.get('/:id', function(request, response) {
+    console.log('hi from database route');
     response.render(request.params.id, {});
 });
 

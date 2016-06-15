@@ -5,16 +5,17 @@ define(function() {
     'use strict';
 
     var routes = [
-        '/insertRenewablesCollection',
-        '/insertHighTechCollection',
-        '/getAllRenewables',
-        '/getAllHighTech',
-        '/emptyRenewablesCollection',
-        '/emptyHighTechCollection'
+        '/database/insertRenewablesCollection',
+        '/database/insertHighTechCollection',
+        '/database/getAllRenewables',
+        '/database/getAllHighTech',
+        '/database/emptyRenewablesCollection',
+        '/database/emptyHighTechCollection'
     ];
 
     function insertCollection(collection) {
         var routeType = (collection === 'Renewables' ? 0 : 1);
+        console.log('calling: ', routes[routeType]);
         var jqxhr = $.get(routes[routeType], function(result) {
                 alert('success');
                 console.log(JSON.stringify(result, null, 4));
@@ -30,7 +31,7 @@ define(function() {
             });
     }
 
-    function getAll() {
+    function getAll(collection) {
         var routeType = (collection === 'Renewables' ? 2 : 3);
         $.getJSON(routes[routeType], function(result) {
                 $('#display').html(JSON.stringify(result, null, 4));
@@ -46,7 +47,7 @@ define(function() {
             });
     }
 
-    function emptyCollection() {
+    function emptyCollection(collection) {
         var routeType = (collection === 'Renewables' ? 4 : 5);
         $.getJSON(routes[routeType], function(result) {
                 $('#display').html(JSON.stringify(result, null, 4));

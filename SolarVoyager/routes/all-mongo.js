@@ -29,17 +29,17 @@ function insertRenewable(renewable, response) {
     }
 
     var newRenewable = new renewables({
-        'Year': renewable.year,
-        'Solar (quadrillion Btu)': renewable.solar,
-        'Geothermal (quadrillion Btu)': renewable.geo,
-        'Other biomass (quadrillion Btu)': renewable.otherBiomass,
-        'Wind power (quadrillion Btu)': renewable.wind,
-        'Liquid biofuels (quadrillion Btu)': renewable.liquidBiofuels,
-        'Wood biomass (quadrillion Btu)': renewable.wood,
-        'Hydropower (quadrillion Btu)': renewable.hydropower
+        'Year': renewable['Year'],
+        'Solar (quadrillion Btu)': renewable['Solar (quadrillion Btu)'],
+        'Geothermal (quadrillion Btu)': ['Geothermal (quadrillion Btu)'],
+        'Other biomass (quadrillion Btu)': renewable['Other biomass (quadrillion Btu)'],
+        'Wind power (quadrillion Btu)': renewable['Wind power (quadrillion Btu)'],
+        'Liquid biofuels (quadrillion Btu)': renewable['Liquid biofuels (quadrillion Btu)'],
+        'Wood biomass (quadrillion Btu)': renewable['Wood biomass (quadrillion Btu)'],
+        'Hydropower (quadrillion Btu)': renewable['Hydropower (quadrillion Btu)']
     });
 
-    console.log('inserting', newRenewable['Solar (quadrillion Btu)']);
+    console.log('inserting', newRenewable['Year']);
 
     newRenewable.save(function(err) {
         totalRenewablesSaved++;
@@ -93,12 +93,12 @@ allMongo.writeData = function(fileName, data) {
 }
 
 allMongo.readRenewables = function(response) {
-    fs.readFile(validRenewables, function(err, collection) {
+    fs.readFile('renewable.json', function(err, renewables) {
         if (err) throw (err);
-        collection = JSON.parse(collection);
-        allMongo.numberOfRenewables = collection.length;
-        for (var i = 0; i < collection.length; i++) {
-            insertRenewable(collection[i], response);
+        renewables = JSON.parse(renewables);
+        allMongo.numberOfRenewables = renewables.length;
+        for (var i = 0; i < renewables.length; i++) {
+            insertRenewable(renewables[i], response);
         }
     });
 }

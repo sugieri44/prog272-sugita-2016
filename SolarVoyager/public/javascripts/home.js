@@ -17,10 +17,10 @@ define(['settings'], function(settings) {
                 $('#debug').html('Error occured: ', a.status);
             })
             .done(function() {
-                console.log('second success');
+                console.log('second success at getSettings');
             })
             .always(function() {
-                console.log('complete');
+                console.log('complete at getSettings');
             });
     }
 
@@ -33,6 +33,7 @@ define(['settings'], function(settings) {
                 $('#display').html(home.color);
                 $('#display2').html(home.size);
                 getSettings();
+                console.log("Current settings retrieved");
                 $('#target').submit(function(event) {
                     event.preventDefault();
                     var userFormData = $(this).serialize();
@@ -42,9 +43,9 @@ define(['settings'], function(settings) {
                         dataSource: $('#dataSource').val(),
                         comment: $('#comment').val()
                     };
+                    settings.setSettings(userData);
                     $.post('/database-settings/updateSettings', userData, function(result) {
-                        console.log(settings);
-                        settings.setSettings(result.query);
+                        console.log("settings: ", settings);
                     });
                 });
 

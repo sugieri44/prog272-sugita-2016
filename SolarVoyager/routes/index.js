@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+
 // slash-someword
 router.get('/:id', function(request, response) {
     'use strict';

@@ -44,7 +44,7 @@ router.post('/updateSettings', function(request, response) {
     settings.findOne({
         keyNote: 'settings'
     }, function(err, doc) {
-        console.log('findone', err, doc);
+        console.log('findone: ', err, doc);
         if (err) {
             response.send({
                 result: 'error'
@@ -56,7 +56,14 @@ router.post('/updateSettings', function(request, response) {
                 doc.dataType = request.body.dataType;
                 doc.dataSource = request.body.dataSource;
                 doc.comment = request.body.comment;
-                doc.save();
+                doc.save(function(err) {
+                    console.log('saved: ', doc);
+                    response.send({
+                        result: 'success',
+                        query: doc
+                    });
+
+                });
             }
         }
     });
