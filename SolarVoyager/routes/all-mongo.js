@@ -5,9 +5,9 @@
 var express = require('express');
 //var router = express.Router();
 var connect = require('./connect');
-var renewables = require('../models/renewables');
+var renewablesModel = require('../models/renewables');
 var highTechEnergies = require('../models/high-tech-energy');
-
+var renewables = require('../public/javascripts/renewables/renewables');
 var fs = require('fs');
 
 var validRenewables = require('../data/Renewable.json');
@@ -28,17 +28,18 @@ function insertRenewable(renewable, response) {
         connect.doConnection();
     }
 
-    var newRenewable = new renewables({
-        'Year': renewable['Year'],
-        'Solar (quadrillion Btu)': renewable['Solar (quadrillion Btu)'],
-        'Geothermal (quadrillion Btu)': ['Geothermal (quadrillion Btu)'],
-        'Other biomass (quadrillion Btu)': renewable['Other biomass (quadrillion Btu)'],
-        'Wind power (quadrillion Btu)': renewable['Wind power (quadrillion Btu)'],
-        'Liquid biofuels (quadrillion Btu)': renewable['Liquid biofuels (quadrillion Btu)'],
-        'Wood biomass (quadrillion Btu)': renewable['Wood biomass (quadrillion Btu)'],
-        'Hydropower (quadrillion Btu)': renewable['Hydropower (quadrillion Btu)']
+    var renewableKey = renewables.getSimpleKeys(renewable);
+    var newRenewable = new renewablesModel({
+        'Year': renewableKey.year,
+        'Solar (quadrillion Btu)': renewableKey.solar,
+        'Geothermal (quadrillion Btu)': renewableKey.geo,
+        'Other biomass (quadrillion Btu)': renewableKey.otherBiomass,
+        'Wind power (quadrillion Btu)': renewableKey.wind,
+        'Liquid biofuels (quadrillion Btu)': renewableKey.liquidBiofuels,
+        'Wood biomass (quadrillion Btu)': renewableKey.wood,
+        'Hydropower (quadrillion Btu)': renewableKey.hydropower
     });
-
+    
     console.log('inserting', newRenewable['Year']);
 
     newRenewable.save(function(err) {
