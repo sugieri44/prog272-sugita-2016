@@ -6,8 +6,8 @@ var express = require('express');
 //var router = express.Router();
 var connect = require('./connect');
 var renewablesModel = require('../models/renewables');
-var highTechEnergies = require('../models/high-tech-energy');
-var renewables = require('../public/javascripts/renewables/renewables');
+var highTechEnergiesModel = require('../models/high-tech-energy');
+//var renewables = require('../public/javascripts/renewables/renewables');
 var fs = require('fs');
 
 var validRenewables = require('../data/Renewable.json');
@@ -28,16 +28,16 @@ function insertRenewable(renewable, response) {
         connect.doConnection();
     }
 
-    var renewableKey = renewables.getSimpleKeys(renewable);
+    //var renewableKey = renewables.getSimpleKeys(renewable);
     var newRenewable = new renewablesModel({
-        'Year': renewableKey.year,
-        'Solar (quadrillion Btu)': renewableKey.solar,
-        'Geothermal (quadrillion Btu)': renewableKey.geo,
-        'Other biomass (quadrillion Btu)': renewableKey.otherBiomass,
-        'Wind power (quadrillion Btu)': renewableKey.wind,
-        'Liquid biofuels (quadrillion Btu)': renewableKey.liquidBiofuels,
-        'Wood biomass (quadrillion Btu)': renewableKey.wood,
-        'Hydropower (quadrillion Btu)': renewableKey.hydropower
+         'Year': renewable['Year'],
+         'Solar (quadrillion Btu)': renewable['Solar (quadrillion Btu)'],
+         'Geothermal (quadrillion Btu)': ['Geothermal (quadrillion Btu)'],
+         'Other biomass (quadrillion Btu)': renewable['Other biomass (quadrillion Btu)'],
+         'Wind power (quadrillion Btu)': renewable['Wind power (quadrillion Btu)'],
+         'Liquid biofuels (quadrillion Btu)': renewable['Liquid biofuels (quadrillion Btu)'],
+         'Wood biomass (quadrillion Btu)': renewable['Wood biomass (quadrillion Btu)'],
+         'Hydropower (quadrillion Btu)': renewable['Hydropower (quadrillion Btu)']
     });
     
     console.log('inserting', newRenewable['Year']);
@@ -60,7 +60,7 @@ function insertHighTechEnergy(highTechEnergy, response) {
     if (!connect.connected) {
         connect.doConnection();
     }
-    var newHighTechEnergy = new highTechEnergies({
+    var newHighTechEnergy = new highTechEnergiesModel({
         'MSN': highTechEnergy.MSN,
         'YYYYMM': highTechEnergy.YYYYMM,
         'Value': highTechEnergy.Value,
@@ -94,8 +94,9 @@ allMongo.writeData = function(fileName, data) {
 }
 
 allMongo.readRenewables = function(response) {
-    fs.readFile('renewable.json', function(err, renewables) {
+    fs.readFile('renewables.json', function(err, renewables) {
         if (err) throw (err);
+        console.log('About to convert to JSON');
         renewables = JSON.parse(renewables);
         allMongo.numberOfRenewables = renewables.length;
         for (var i = 0; i < renewables.length; i++) {

@@ -1,3 +1,6 @@
+/**
+ * Created by charlie on 5/18/16.
+ */
 define(['jquery','settings'], function($, settings) {
     'use strict';
 
