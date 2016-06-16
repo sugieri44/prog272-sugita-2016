@@ -24,7 +24,7 @@ define(function() {
                 console.log('second success');
             })
             .fail(function() {
-                alert('error');
+                alert('error occured when calling insertRenewablesCollection');
             })
             .always(function() {
                 console.log('finished');

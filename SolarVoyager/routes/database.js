@@ -94,10 +94,6 @@ router.get('/emptyHighTechCollection', function(request, response) {
 router.get('/insertRenewablesCollection', function(request, response) {
     console.log('insertRenewablesCollection routes called');
     allMongo.readRenewables(response);
-    response.send({
-        result: 'success',
-        renewables: response
-    });
 });
 
 router.get('/insertHighTechCollection', function(request, response) {
