@@ -44,7 +44,7 @@ router.post('/updateSettings', function(request, response) {
         connect.doConnection();
     }
 
-    settings.findOne({
+    Settings.findOne({
         keyNote: 'settings'
     }, function(err, doc) {
         console.log('findone: ', err, doc);
@@ -80,7 +80,7 @@ router.get('/getSettings', function(request, response) {
         connect.doConnection();
     }
 
-    settings.findOne({
+    Settings.findOne({
         keyNote: 'settings'
     }, function(err, doc) {
         console.log('findone', err, doc);

@@ -90,7 +90,7 @@ define(['jquery', 'settings'], function($, settings) {
             console.log('renewables.init() was called');
             $('#elf-view').load('renewables/renewables-page', function(response) {
                 $('#display').html(renewables.msg);
-                $('#display2').html(renewables.database);
+                $('#display2').html(renewables.size);
                 index = $('#indexInput').val();
                 getRenewable();
                 $('#minusButton').click(function() {

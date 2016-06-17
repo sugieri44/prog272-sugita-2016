@@ -9,7 +9,7 @@ var fs = require('fs');
 //Nothing here gets called unless /renewables loaded
 router.get('/', function(request, response) {
     'use strict';
-    console.log('Renewables called');
+    console.log('Renewables was called');
 
     fs.readFile('data/Renewable.json', 'utf8', function(err, data) {
         //if (err) throw err;
@@ -35,7 +35,6 @@ router.get('/byIndex/:id', function(request, response) {
         if (err) {
             response.status(404).send(err);
         } else {
-
             var json = JSON.parse(data); //parse it to JavaScript object from string (they were strings in the file)
             var requestedRenewable = json[parseInt(request.params.id)];
             if (requestedRenewable !== undefined) {
@@ -43,12 +42,7 @@ router.get('/byIndex/:id', function(request, response) {
                     result: 'Success',
                     renewables: requestedRenewable
                 });
-                return;
             }
-            response.send({
-                result: 'Failure',
-                renewables: null
-            });
         }
     });
 });

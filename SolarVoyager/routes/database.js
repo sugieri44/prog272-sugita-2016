@@ -31,7 +31,7 @@ router.get('/getAllRenewables', function(request, response) {
     renewables.find({}, function(err, data) {
         console.log(data.length);
         console.log(data[0]);
-        allData = data;
+        var allData = data;
 
         allMongo.writeData('Renewables.json', allData);
 
@@ -54,7 +54,7 @@ router.get('/getAllHighTech', function(request, response) {
     highTechEnergy.find({}, function(err, data) {
         console.log(data.length);
         console.log(data[0]);
-        allData = data;
+        var allData = data;
 
         allMongo.writeData('HighTechEnergy.json', allData);
 

@@ -20,7 +20,7 @@ fdescribe('Elvenware Spec Routes Suite', function() {
             });
     });
 
-    it('renewables first object body', function(done) {
+    fit('renewables first object body', function(done) {
         request(app)
             .get('/renewables')
             .expect(200)
@@ -38,14 +38,14 @@ fdescribe('Elvenware Spec Routes Suite', function() {
             });
     });
 
-    it('shows we can get renewables objects by index', function(done) {
+    fit('shows we can get renewables objects by index', function(done) {
         request(app)
-            .get('/renewablesByIndex/0')
+            .get('renewables/byIndex/0')
             .expect(200)
             .expect('Content-Type', /json/)
             .expect(function(response) {
                 expect(response.body.result).toBe('Success');
-                //console.log(response.body.renewables);
+                console.log(response.body.renewables);
                 expect(response.body.renewables.Year).toBe('2017');
             })
             .end(function(err, res) {
@@ -58,10 +58,11 @@ fdescribe('Elvenware Spec Routes Suite', function() {
 
     it('shows we can get renewables objects by year', function(done) {
         request(app)
-            .get('/renewablesByYear/2017')
-            .expect(200)
+            .get('renewables/byYear/2017')
+            //.expect(200)
             .expect('Content-Type', /json/)
             .expect(function(response) {
+                console.log(typeof response);
                 expect(response.body.result).toBe('Success');
                 //console.log(response.body.renewables);
                 expect(response.body.renewables.Year).toBe('2017');

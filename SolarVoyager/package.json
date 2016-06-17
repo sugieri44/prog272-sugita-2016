@@ -14,9 +14,11 @@
     "debug": "~2.2.0",
     "express": "^4.13.4",
     "jade": "~1.11.0",
+    "jasmine": "^2.4.1",
     "mongoose": "^4.4.20",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "supertest": "^1.2.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
