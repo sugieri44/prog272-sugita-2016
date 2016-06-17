@@ -24,7 +24,7 @@ define(function() {
                 console.log('second success');
             })
             .fail(function() {
-                alert('error occured when calling insertRenewablesCollection');
+                alert('error');
             })
             .always(function() {
                 console.log('finished');
@@ -34,7 +34,7 @@ define(function() {
     function getAll(collection) {
         var routeType = (collection === 'Renewables' ? 2 : 3);
         $.getJSON(routes[routeType], function(result) {
-                $('#display').html(JSON.stringify(result, null, 4));
+                $('#data').html(JSON.stringify(result, null, 4));
             })
             .done(function() {
                 console.log('second success');

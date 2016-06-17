@@ -4,37 +4,53 @@
 define(function() {
     'use strict';
 
-    //get a list
-
-    //do types.forEach(function(energyTypes)
-
-    //and find a unique type of msn type 
-    //and send back a list with 12 unique msn types
-
-    function getMsnTypes() {
+    function getMsnTypes(energyTypes) {
         console.log('getMsnTypes was called');
-        $.getJSON('/msnTypes', function(response) {
-                console.log(response);
-                $('#msn').html(JSON.stringify(response, null, 4));
-            })
-            .done(function() {
-                console.log('second success');
-            })
-            .fail(function(a, b, c) {
-                console.log('Error', a, b, c);
-            })
-            .always(function() {
-                console.log('complete');
-            });
-    }
+        var uniqueTypes = [];
+        var singleType = {
+            msn: null,
+            description: ''
+        };
 
-    var msnTypes = {
-        init: function() {
-            console.log('energyOverview.init() was called');
-            $('#elf-view').load('high-tech-energy/msn-types-page', function(response) {
-                getMsnTypes();
-            });
+        function getShorterArray(longerArray) {
+            console.log('getShorterArray() was called');
+            singleType = Object.create(longerArray);
+            singleType.msn = longerArray.MSN;
+            singleType.description = longerArray.Description;
+
+            return singleType;
         }
-    };
-    return msnTypes;
+
+        function insert(msn) {
+            console.log('insert() was called');
+            var uniqueType = getShorterArray(msn);
+            console.log(uniqueType);
+            uniqueTypes.push(uniqueType);
+        }
+
+        //Insert the first item in the passed array
+        insert(energyTypes[0]);
+
+        //To check to see if a passed msn already exists in the array
+        function isUnique(msn) {
+            var result = true;
+            for (var i = 0; i < uniqueTypes.length; i++) {
+                if (uniqueTypes[i].MSN === msn) {
+                    result = false;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        //Loop through energyTypes and insert if msn is unique
+        for (var i = 1; i < energyTypes.length; i++) {
+            var current = energyTypes[i];
+            if (isUnique(current.MSN)) {
+                insert(current);
+            }
+        }
+
+        return uniqueTypes;
+    }
 });

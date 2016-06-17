@@ -8,6 +8,8 @@ var connect = {
     connected: false,
 
     simpleConnect: function() {
+        'use strict';
+
         var url = 'mongodb://127.0.0.1:27017/renew';
         connect.connected = true;
         mongoose.connect(url);
@@ -21,6 +23,8 @@ var connect = {
 
     // mongodb://<dbuser>:<dbpassword>@ds011281.mlab.com:11281/prog272-sugita
     mlabConnect: function() {
+        'use strict';
+
         connect.connected = true;
         var userName = 'foo';
         var password = 'boo';
@@ -40,6 +44,8 @@ var connect = {
     },
 
     doConnection: function(useSimple) {
+        'use strict';
+
         var connectType = useSimple || false;
         if (connectType) {
             connect.simpleConnect();

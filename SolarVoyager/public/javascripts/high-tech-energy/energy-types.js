@@ -1,7 +1,7 @@
 /**
  * Created by bcuser on 5/30/16.
  */
-define(function() {
+define(['jquery'], function($) {
     'use strict';
 
     function getMsnTypes(energyTypes) {
@@ -57,7 +57,6 @@ define(function() {
     function getEnergyTypes() {
         console.log('getEnergyTypes was called');
         $.getJSON('/high-tech-energy/energy-types', function(response) {
-                //pass only array
                 var types = getMsnTypes(response.energyTypes);
                 $('#types').html(JSON.stringify(types, null, 4));
                 //displayEnergyTypes(types);
@@ -73,20 +72,9 @@ define(function() {
             });
     }
 
-    /*
-     function displayEnergyTypes(types){
-     var ul = document.getElementById('types');
-     var li = document.createElement('li');
-     types.forEach(function(type, i){
-     li.appendChild(type.msn + type.description);
-     ul.appendChild(li);
-     $('#types').append(ul);
-     });
-     }*/
-
     var energyTypes = {
         init: function() {
-            console.log('energyOverview.init() was called');
+            console.log('energyTypes.init() was called');
             $('#elf-view').load('high-tech-energy/energy-types-page', function(response) {
                 getEnergyTypes();
             });

@@ -33,7 +33,6 @@ define(['settings'], function(settings) {
                 $('#display').html(home.color);
                 $('#display2').html(home.size);
                 getSettings();
-                console.log("Current settings retrieved");
                 $('#target').submit(function(event) {
                     event.preventDefault();
                     var userFormData = $(this).serialize();
@@ -44,8 +43,10 @@ define(['settings'], function(settings) {
                         comment: $('#comment').val()
                     };
                     settings.setSettings(userData);
+                    console.log('Set to ', settings.useDatabase,
+                        settings.useLocalMongoDb);
                     $.post('/database-settings/updateSettings', userData, function(result) {
-                        console.log("settings: ", settings);
+                        console.log('settings: ', settings);
                     });
                 });
 

@@ -20,12 +20,14 @@ router.get('/', function(req, res, next) {
 var connected = false;
 
 router.get('/getAllRenewables', function(request, response) {
-    console.log("AllData route invoked.");
+    'use strict';
+
+    console.log('AllData route invoked.');
     if (!connect.connected) {
         connect.doConnection();
     }
 
-    console.log("About to find renewables.");
+    console.log('About to find renewables.');
     renewables.find({}, function(err, data) {
         console.log(data.length);
         console.log(data[0]);
@@ -41,12 +43,14 @@ router.get('/getAllRenewables', function(request, response) {
 });
 
 router.get('/getAllHighTech', function(request, response) {
-    console.log("AllData route invoked.");
+    'use strict';
+
+    console.log('AllData route invoked.');
     if (!connect.connected) {
         connect.doConnection();
     }
 
-    console.log("About to find highTechEnergy.");
+    console.log('About to find highTechEnergy.');
     highTechEnergy.find({}, function(err, data) {
         console.log(data.length);
         console.log(data[0]);
@@ -62,6 +66,8 @@ router.get('/getAllHighTech', function(request, response) {
 });
 
 router.get('/emptyRenewablesCollection', function(request, response) {
+    'use strict';
+
     renewables.remove({}, function(err) {
         if (err) {
             response.send({
@@ -77,6 +83,8 @@ router.get('/emptyRenewablesCollection', function(request, response) {
 });
 
 router.get('/emptyHighTechCollection', function(request, response) {
+    'use strict';
+
     highTechEnergy.remove({}, function(err) {
         if (err) {
             response.send({
@@ -92,18 +100,23 @@ router.get('/emptyHighTechCollection', function(request, response) {
 });
 
 router.get('/insertRenewablesCollection', function(request, response) {
+    'use strict';
+
     console.log('insertRenewablesCollection routes called');
     allMongo.readRenewables(response);
 });
 
 router.get('/insertHighTechCollection', function(request, response) {
+    'use strict';
+
     allMongo.readHighTechEnergy(response);
 });
 
 router.get('/:id', function(request, response) {
+    'use strict';
+
     console.log('hi from database route');
     response.render(request.params.id, {});
 });
-
 
 module.exports = router;

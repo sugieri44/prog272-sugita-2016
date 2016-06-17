@@ -1,7 +1,7 @@
 /**
  * Created by bcuser on 5/23/16.
  */
-define(function() {
+define(['jquery', 'settings'], function($, settings) {
     'use strict';
 
     function callGetByIndex() {
@@ -9,8 +9,6 @@ define(function() {
         //Get a user input
         var index = $('#index').val();
         console.log('index:', index);
-
-        //Call JSON and pass the user inputs as a parameter
         $.getJSON('/renewables/byIndex/' + index, function(response) {
                 console.log(response);
                 $('#debug').html(JSON.stringify(response, null, 4));

@@ -10,14 +10,11 @@ router.get('/', function(req, res, next) {
     });
 });
 
-
-// slash-someword
 router.get('/:id', function(request, response) {
     'use strict';
     response.render(request.params.id, {
         title: 'ElfComponent'
     });
 });
-
 
 module.exports = router;

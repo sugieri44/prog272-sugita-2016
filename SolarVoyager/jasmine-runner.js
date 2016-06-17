@@ -1,7 +1,3 @@
-/**
- * Created by charlie on 3/1/16.
- */
-
 var Jasmine = require('jasmine');
 var SpecReporter = require('jasmine-spec-reporter');
 var noop = function() {};

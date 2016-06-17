@@ -4,7 +4,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var settings = require('../models/settings');
+var Settings = require('../models/settings');
 var connect = require('./connect');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -12,15 +12,16 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-
 function saveSettings(request, response) {
+    'use strict';
+
     console.log('request body', request.body);
 
-    var newSettings = new settings({
-        "keyNote": 'settings',
-        "dataSource": request.body.dataSource,
-        "dataType": request.body.dataType,
-        "comment": request.body.comment
+    var newSettings = new Settings({
+        'keyNote': 'settings',
+        'dataSource': request.body.dataSource,
+        'dataType': request.body.dataType,
+        'comment': request.body.comment
     });
 
     console.log('inserting', newSettings.comment);
@@ -36,6 +37,8 @@ function saveSettings(request, response) {
 }
 
 router.post('/updateSettings', function(request, response) {
+    'use strict';
+
     console.log('request body', request.body);
     if (!connect.connected) {
         connect.doConnection();
@@ -70,6 +73,8 @@ router.post('/updateSettings', function(request, response) {
 });
 
 router.get('/getSettings', function(request, response) {
+    'use strict';
+
     console.log('request body', request.body);
     if (!connect.connected) {
         connect.doConnection();
@@ -91,7 +96,7 @@ router.get('/getSettings', function(request, response) {
                         dataSource: 'Local MongoDb',
                         comment: 'Default Comment'
                     }
-                })
+                });
             } else {
                 response.send({
                     settings: doc

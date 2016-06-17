@@ -1,14 +1,21 @@
-extends layout
 
-block content
-    h1= title
-    p Welcome to #{title}
+.jumbotron
+	h1 Database Page
+	P Convert JSON to MongoDB Data
 
-    select#collection(name='collectionType')
-        option Renewables
-        option High Tech Energy
-    button#insertValidData Insert Valid Data
-    button#getAll Get All
-    button#emptyCollection Empty Collection
+.container
+	.panel.panel-default
+		.panel-heading Database
+		.panel-body
+			.input-group
+				select#collection.form-control
+					option Renewables
+					option High Tech Energy
+				button#insertValidData.btn-default Insert Valid Data
+				button#getAll.btn-default Get All
+				button#emptyCollection.btn-default Empty Collection
 
-    pre#display
+	.panel.panel-default
+		.panel-heading Result
+		.panel-body
+				pre#data

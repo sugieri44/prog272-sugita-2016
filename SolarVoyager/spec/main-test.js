@@ -23,14 +23,15 @@ require.config({
         control: 'public/javascripts/control',
         home: 'public/javascripts/home',
         renewables: 'public/javascripts/renewables/renewables',
-        renewablesByIndex: 'public/javascripts/renewables/renewables-index',
-        renewablesByYear: 'public/javascripts/renewables/renewables-year',
+        renewablesByIndex: 'public/javascripts/renewables/renewablesByIndex',
+        renewablesByYear: 'public/javascripts/renewables/renewablesByYear',
         energyOverview: 'public/javascripts/high-tech-energy/energy-overview',
         energyTypes: 'public/javascripts/high-tech-energy/energy-types',
         msnTypes: 'public/javascripts/high-tech-energy/msn-types',
         about: 'public/javascripts/about',
         database: 'public/javascripts/database',
-        clientRenewables: 'spec/data/client-renewables'
+        clientRenewables: 'spec/data/client-renewables',
+        settings: 'public/javascripts/settings'
     },
     deps: loadTestsIntoArray(),
     callback: window.__karma__.start

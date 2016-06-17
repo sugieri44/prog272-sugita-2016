@@ -36,7 +36,7 @@ define(['jquery', 'settings'], function($, settings) {
     }
 
     function getRenewable() {
-        console.log('getRenewable was called');
+        console.log('getRenewable was called from /spec/data/');
         var routeType = settings.useDatabase ? 0 : 1;
         var renewableRoutes = ['/database/getAllRenewables', '/renewables'];
         $('#display').append(settings.useDatabase);
@@ -52,11 +52,11 @@ define(['jquery', 'settings'], function($, settings) {
                     //$('#debug').html(JSON.stringify(response, null, 4));
                 }
             })
-            .fail(function(a, b, c) {
-                console.log('Error', a, b, c);
-            })
             .done(function() {
                 console.log('second success');
+            })
+            .fail(function(a, b, c) {
+                console.log('Error', a, b, c);
             })
             .always(function() {
                 console.log('complete');

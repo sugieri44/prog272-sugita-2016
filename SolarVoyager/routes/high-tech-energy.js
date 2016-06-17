@@ -41,9 +41,6 @@ router.get('/energy-types', function(request, response) {
     });
 });
 
-
-//To handle high-tech-energy calls in their own folder
-
 router.get('/:id', function(request, response) {
     'use strict';
     console.log('hi');

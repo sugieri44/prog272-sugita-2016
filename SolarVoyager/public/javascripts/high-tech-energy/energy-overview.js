@@ -4,7 +4,6 @@
 define(function() {
     'use strict';
 
-
     function getEnergyOverview() {
         console.log('getEnergyOverview was called');
         $.getJSON('/high-tech-energy', function(response) {

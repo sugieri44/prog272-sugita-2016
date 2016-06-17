@@ -1,11 +1,11 @@
 //Load jquery and stick it into '$' = code injection
 define(['jquery', 'home', 'about',
         'renewables', 'renewablesByIndex', 'renewablesByYear',
-        'energyOverview', 'energyTypes', 'msnTypes', 'database'
+        'energyOverview', 'energyTypes', 'database'
     ],
     function($, home, about,
         renewables, renewablesByIndex, renewablesByYear,
-        energyOverview, energyTypes, msnTypes, database) {
+        energyOverview, energyTypes, database) {
         'use strict';
         //Do setup work here
 
